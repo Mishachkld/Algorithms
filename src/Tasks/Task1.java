@@ -11,18 +11,14 @@ public class Task1 {
     public static void main(String[] args) {  /// ()[({}())]
         System.out.print("Введите строку: ");
         Scanner scanner = new Scanner(System.in);
-        Task1 task = new Task1();
         List<String> expression = List.of(scanner.nextLine().split(""));
-
-        if (task.checkExpression(expression))
+        if (checkExpressionForStaples(expression))
             System.out.println("Все гуд, строка нормальная.");
         else
-            System.out.println("Не повезло, строка неправильная :(");
-
-
+            System.out.println("Строка неправильная :(");
     }
 
-    public boolean checkExpression(List<String> expression){
+    public static boolean checkExpressionForStaples(List<String> expression){
         Stack<String> stack = new Stack<>();
         boolean result;
         for (String item : expression) {
@@ -35,9 +31,6 @@ public class Task1 {
                     stack.pop();
             } else if (Task1.openLetter.contains(item)) {
                 stack.push(item);
-            } else {
-                System.out.println("Ошибка :(");
-                break;
             }
         }
         result = stack.empty();
