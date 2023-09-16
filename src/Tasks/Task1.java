@@ -4,8 +4,8 @@ import java.util.*;
 
 public class Task1 {
 
-    private static ArrayList<String> openLetter = new ArrayList<>(Arrays.asList("{", "[", "("));
-    private static ArrayList<String> closeLetter = new ArrayList<>(Arrays.asList("}", "]", ")"));
+    private static final ArrayList<String> openLetter = new ArrayList<>(Arrays.asList("{", "[", "("));
+    private static final ArrayList<String> closeLetter = new ArrayList<>(Arrays.asList("}", "]", ")"));
 
 
     public static void main(String[] args) {  /// ()[({}())]
@@ -21,15 +21,6 @@ public class Task1 {
 
 
     }
-
-    public boolean checkOpen(String letter) {
-        return openLetter.contains(letter);
-    }
-
-    public boolean checkClose(String letter) {
-        return closeLetter.contains(letter);
-    }
-
 
     public boolean checkExpression(List<String> expression){
         Stack<String> stack = new Stack<>();
