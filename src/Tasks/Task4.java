@@ -1,9 +1,6 @@
 package Tasks;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Task4 {
 
@@ -20,22 +17,16 @@ public class Task4 {
             elements.add(Integer.valueOf(integer));
         }
 
-
+//
         double lenOfArray = (elements.size() / DISTANCE);
         while (lenOfArray > 1) {
-            int gap = (int) lenOfArray;
-            for (int i = 0; i < lenOfArray; i++) {
-                for (int j = gap; j < elements.size(); j++) {
-                    if (elements.get(i) < elements.get((j))) {
-                        int changedElement = elements.get(i);
-                        elements.set(i, elements.get(j));
-                        elements.set(j, changedElement);
-                    }
-                }
+            for (int i = 0; i < elements.size() - lenOfArray; i++) {
+                int secondElement = (int) (i + lenOfArray);
+                if (elements.get(i) < elements.get(secondElement))
+                    Collections.swap(elements, i,secondElement);
             }
             lenOfArray = (lenOfArray / DISTANCE);
         }
         System.out.println(elements);
-
     }
 }

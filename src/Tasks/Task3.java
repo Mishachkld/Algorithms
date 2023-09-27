@@ -1,5 +1,7 @@
 package Tasks;
 
+import java.math.BigInteger;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Task3 {
@@ -8,7 +10,7 @@ public class Task3 {
         System.out.println("Введите число: ");
         /*Scanner scanner = new Scanner(System.in);
        int x = Integer.parseInt(scanner.nextLine());*/
-        int x = 10_000;
+        long x = 10_000;
         int counter = 1;
         for (int k = 0; k < Math.pow(x, (double) 1/3) + 1; k++)  /// идем до корня
             for (int l = 0; l < Math.pow(x, (double) 1/5) + 1; l++)
