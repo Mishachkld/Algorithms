@@ -9,7 +9,7 @@ public class Task4 {
 
     public static final double DISTANCE = 1.247;
 
-    public static void main(String[] args) {   /// 5 1 4 2 8
+    public static void main(String[] args) {   /// 5 1 4 2 8 255 64 8 74 9 6 7 5 6 2 5 8 6
         ArrayList<Integer> elements = new ArrayList<>();
         System.out.println("Введите строку: ");
         Scanner scanner = new Scanner(System.in);
@@ -23,9 +23,10 @@ public class Task4 {
 
         double lenOfArray = (elements.size() / DISTANCE);
         while (lenOfArray > 1) {
+            int gap = (int) lenOfArray;
             for (int i = 0; i < lenOfArray; i++) {
-                for (int j = 0; j < i; j++) {
-                    if (elements.get(i) > elements.get((j))) {
+                for (int j = gap; j < elements.size(); j++) {
+                    if (elements.get(i) < elements.get((j))) {
                         int changedElement = elements.get(i);
                         elements.set(i, elements.get(j));
                         elements.set(j, changedElement);
