@@ -4,8 +4,8 @@ import java.util.*;
 
 public class Task1 {
 
-    private static final ArrayList<String> OPEN_LETTERS = new ArrayList<>(Arrays.asList("{", "[", "("));
-    private static final ArrayList<String> CLOSE_LETTERS = new ArrayList<>(Arrays.asList("}", "]", ")"));
+    public static final ArrayList<String> OPEN_LETTERS = new ArrayList<>(Arrays.asList("{", "[", "("));
+    public static final ArrayList<String> CLOSE_LETTERS = new ArrayList<>(Arrays.asList("}", "]", ")"));
 
 
     public static void main(String[] args) {  /// ()[({}())]

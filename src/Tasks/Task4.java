@@ -10,14 +10,11 @@ public class Task4 {
         ArrayList<Integer> elements = new ArrayList<>();
         System.out.println("Введите строку: ");
         Scanner scanner = new Scanner(System.in);
-        /*while (scanner.hasNext())
-            elements.add(scanner.nextInt());*/
         List<String> elementsString = Arrays.asList(scanner.nextLine().split(" "));
         for (String integer : elementsString) {
             elements.add(Integer.valueOf(integer));
         }
 
-//
         double lenOfArray = (elements.size() / DISTANCE);
         while (lenOfArray > 1) {
             for (int i = 0; i < elements.size() - lenOfArray; i++) {
