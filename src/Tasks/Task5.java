@@ -13,16 +13,10 @@ public class Task5 {
         System.out.println(expression);
     }
 
-    public static void selectedSort(List<String> expression) {
-        for (int i = 1; i < expression.size(); i++) {
-            for (int j = i - 1; j >= 0; j--) {
-                if (Integer.parseInt(expression.get(j)) > Integer.parseInt(expression.get(j + 1))) {
+    public static void selectedSort(List<String> expression) {  /// сложность N^2
+        for (int i = 1; i < expression.size(); i++)
+            for (int j = i - 1; j >= 0; j--)
+                if (Integer.parseInt(expression.get(j)) > Integer.parseInt(expression.get(j + 1)))
                     Collections.swap(expression, j, j + 1);
-                    System.out.println(Arrays.toString(expression.toArray()));
-                }
-            }
-        }
-
     }
-
 }
