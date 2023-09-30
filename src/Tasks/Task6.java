@@ -18,11 +18,9 @@ public class Task6 {
     public static void chooseSort(List<String> expression){
         for (int i = 0; i < expression.size() - 1; i++) {
             int min = i;
-            for (int j = i + 1; j < expression.size(); j++) {
-                if (Integer.parseInt(expression.get(j) ) < Integer.parseInt(expression.get(min))){
+            for (int j = i + 1; j < expression.size(); j++)
+                if (Integer.parseInt(expression.get(j) ) < Integer.parseInt(expression.get(min)))
                     min = j;
-                }
-            }
             Collections.swap(expression, min, i);
         }
     } 
