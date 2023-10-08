@@ -11,14 +11,25 @@ public class Task1 {
     public static void main(String[] args) {  /// ()[({}())]
         System.out.print("Введите строку: ");
         Scanner scanner = new Scanner(System.in);
-        List<String> expression = List.of(scanner.nextLine().split(""));
+        List<String> expression = List.of(scanner.nextLine().split(" "));
         if (checkExpressionForStaples(expression))
             System.out.println("Все гуд, строка нормальная.");
         else
             System.out.println("Строка неправильная :(");
     }
 
-    public static boolean checkExpressionForStaples(List<String> expression){
+    public static List<Integer> scanConsole() {
+        List<Integer> expression = new ArrayList<>();
+        System.out.print("Введите строку: ");
+        Scanner scanner = new Scanner(System.in);
+        List<String> expressionString = new ArrayList<>(List.of(scanner.nextLine().split(" ")));
+        for (String item : expressionString) {
+            expression.add(Integer.valueOf(item));
+        }
+        return expression;
+    }
+
+    public static boolean checkExpressionForStaples(List<String> expression) {
         Stack<String> stack = new Stack<>();
         boolean result;
         for (String item : expression) {
