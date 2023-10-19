@@ -14,12 +14,17 @@ public class Task2 {
         System.out.print("Введите строку: ");
         Scanner scanner = new Scanner(System.in);
         List<String> expression = List.of(scanner.nextLine().split(""));
-        if (Task1.checkExpressionForStaples(expression))
-            calculateExpression(expression);
+        if (Task1.checkExpressionForStaples(expression)) {
+            try {
+                calculateExpression(expression);
+            } catch (Exception e) {
+                System.out.println("Делоение на 0 или еще какая-то проблема :(");
+            }
+        }
 
     }
 
-    private static void calculateExpression(List<String> expression) {
+    private static void calculateExpression(List<String> expression) throws Exception {
         Stack<String> numbers = new Stack<>();
         Stack<String> calculus = new Stack<>();
         for (String item : expression) {
@@ -43,7 +48,7 @@ public class Task2 {
         System.out.println(numbers.peek());
     }
 
-    private static String makeSmthWithnumber(double second, double first, String move) {
+    private static String makeSmthWithnumber(double second, double first, String move) throws Exception {
         double result;
         switch (move) {
             case "+":
@@ -53,7 +58,11 @@ public class Task2 {
                 result = first - second;
                 break;
             case "/":
-                result = first / second;
+                if (second != 0)
+                    result = first / second;
+                else{
+                    throw new Exception("Деление на 0!!1!!!1!");
+                }
                 break;
             default:
                 result = first * second;

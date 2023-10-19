@@ -28,6 +28,10 @@ public class Task1 {
         }
         return expression;
     }
+    public static List<String> scanConsoleString() {
+        System.out.print("Введите строку: ");
+        return new ArrayList<>(List.of(new Scanner(System.in).nextLine().split(" ")));
+    }
 
     public static boolean checkExpressionForStaples(List<String> expression) {
         Stack<String> stack = new Stack<>();
@@ -36,10 +40,12 @@ public class Task1 {
             if (Task1.CLOSE_LETTERS.contains(item)) {
                 if (item.equals("}") && stack.peek().equals("{"))
                     stack.pop();
-                if (item.equals(")") && stack.peek().equals("("))
+                else if (item.equals(")") && stack.peek().equals("("))
                     stack.pop();
-                if (item.equals("]") && stack.peek().equals("["))
+                else if (item.equals("]") && stack.peek().equals("["))
                     stack.pop();
+                else
+                    return false;
             } else if (Task1.OPEN_LETTERS.contains(item)) {
                 stack.push(item);
             }
