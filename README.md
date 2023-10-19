@@ -18,4 +18,14 @@
 ### [6.Task6](https://github.com/Mishachkld/Algorithms/blob/master/src/Tasks/Task6.java)
 * Сортировка Посредством выбора
 ### [7.Task7](https://github.com/Mishachkld/Algorithms/blob/master/src/Tasks/Task7.java)
+* Сортировка
+### [8.Task8](https://github.com/Mishachkld/Algorithms/blob/master/src/Tasks/Task8.java)
 * Сортировка 
+### [9.Task9](https://github.com/Mishachkld/Algorithms/blob/master/src/Tasks/Task9.java)
+* Сортировка
+### [10.Task10](https://github.com/Mishachkld/Algorithms/blob/master/src/Tasks/Task10.java)
+* Сортировка
+### [11.Task11](https://github.com/Mishachkld/Algorithms/blob/master/src/Tasks/Task11.java)
+* Сортировка
+### [12.Task12](https://github.com/Mishachkld/Algorithms/blob/master/src/Tasks/Task12.java)
+* Сортировка
