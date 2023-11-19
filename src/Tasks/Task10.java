@@ -2,7 +2,7 @@ package Tasks;
 
 import java.util.ArrayList;
 import java.util.List;
-
+// Сложность O(n^2)
 public class Task10 {  /// 4545456 4545 55 5 58 9127 789 87 98 45 4 454 4 84 89849 49 874 98 79 7874 8 49 49 849 8
     public static void main(String[] args) {
         List<Integer> expression = Task1.scanConsole();
@@ -15,14 +15,14 @@ public class Task10 {  /// 4545456 4545 55 5 58 9127 789 87 98 45 4 454 4 84 898
         List<Integer> array = new ArrayList<>();
         while (!left.isEmpty() && !right.isEmpty())
             if (left.get(0) < right.get(0))
-                // если в левом массиве элимент меньше, то перемещаем его в правый
+                // если в левом массиве элемент меньше, то перемещаем его в массив с результатом
                 array.add(left.remove(0));
             else
-                // иначе делаем наоборот: перемещаем элемент влево
+                // иначе делаем наоборот: перемещаем элемент из правой части в результирующий
                 array.add(right.remove(0));
         array.addAll(left);
         array.addAll(right);
-        return array; // возвращаем скленные левую и правую части
+        return array; // возвращаем реузультирующий + остатки из левой и правых частей
     }
 
     public static List<Integer> mergeSort(List<Integer> expression) {

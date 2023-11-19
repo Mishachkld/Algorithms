@@ -3,7 +3,7 @@ package Tasks;
 import java.util.Collections;
 import java.util.List;
 
-public class Task9 { // heapSort Пирамидальная
+public class Task9 { // heapSort Пирамидальная Сложность: О(n*log n)
 
     public static void main(String[] args) {   /// 14 61 85 24 74 26 17 50 40 45 21 32 59 58 13
         List<Integer> expression = Task1.scanConsole();

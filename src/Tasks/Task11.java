@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Task11 {  /// Сложность алгоритма:
+public class Task11 {  /// Сложность алгоритма: Худшее время О(n^2) Лучшее время: O(n*logn)
     public static void main(String[] args) {  /// 1455 45 64 6548 84 45 86 465 456123 123
         /// 5 11 6 7
         List<Integer> expression = Task1.scanConsole();
