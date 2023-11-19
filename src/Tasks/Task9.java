@@ -12,18 +12,20 @@ public class Task9 { // heapSort Пирамидальная
     }
 
     private static void heapSort(List<Integer> expression) {
-        buildMaxHeap(expression);
+        buildMaxHeap(expression);  /// делаем правильное дерево (потомок меньше родителя)
         int size = expression.size() - 1;
         for (int i = size; i > 0; i--) {
-            Collections.swap(expression, 0, i);
-            heapify(expression, 0, --size);
+            Collections.swap(expression, 0, i);  // самый большой элемент перемещаем из начала массива в конец и далее его уже не рассматриваем
+            heapify(expression, 0, --size); // опять выполняем процедуру построения правильного дерева
         }
     }
 
-    private static void heapify(List<Integer> expression, int i, int size) {
+    private static void heapify(List<Integer> expression, int i, int size) {  /// в начало массива засовываем самый большой элемент
+        // и делаем так, что бы каждый птомок был меньше чем его родитель
         int left = 2 * i + 1;
         int right = 2 * i + 2;
         int max = i;
+        /// сравниваем и кладем самый большой элемент в корень тек. Дерева
         if (left < size && expression.get(left) > expression.get(i))
             max = left;
         if (right < size && expression.get(right) > expression.get(max))
