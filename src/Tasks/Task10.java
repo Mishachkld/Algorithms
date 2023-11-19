@@ -22,7 +22,7 @@ public class Task10 {  /// 4545456 4545 55 5 58 9127 789 87 98 45 4 454 4 84 898
                 array.add(right.remove(0));
         array.addAll(left);
         array.addAll(right);
-        return array; // возвращем склеиные левую и правую части
+        return array; // возвращаем скленные левую и правую части
     }
 
     public static List<Integer> mergeSort(List<Integer> expression) {
