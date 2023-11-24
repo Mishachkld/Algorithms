@@ -12,15 +12,14 @@ public class Task13 {
 
     public static void main(String[] args) throws IOException {
         List<String> expression = readFile();
-        System.out.println(expression);
         Task13 task = new Task13();
         task.calculateHash(expression);
         writeInFile(task.table);
     }
 
-    public void calculateHash(List<String> expression) {
+    public void calculateHash(List<String> expression) {  /// считаем хэш-сумму для всех элементов
         for (String item : expression) {
-            int sum = createHashSum(item);
+            int sum = createHashSum(item); // считаем хэш-сумму для элемента
             while (!this.isPutInTable(item, sum)) {
                 sum++;
             }
@@ -28,11 +27,10 @@ public class Task13 {
 
     }
 
-    private Integer createHashSum(String item) {
+    private Integer createHashSum(String item) { // создаем хэш-сумму для элемента
         int sum = 0;
-        for (Character letter : item.toCharArray()) {
+        for (Character letter : item.toCharArray())
             sum += letter;
-        }
         return sum;
     }
 
@@ -57,5 +55,6 @@ public class Task13 {
 
         writer.write(builder.toString());
         writer.close();
+        System.out.println("Вывод в файл " + Task13.OUT_PATH + " выполнен!");
     }
 }
