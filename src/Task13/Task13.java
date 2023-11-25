@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Task13 {
     private static final String IN_PATH = "src/Task13/input.txt";
-    private static final String OUT_PATH = "src/Task13/out.txt";
+    public static final String OUT_PATH = "src/Task13/out.txt";
     private HashMap<Integer, String> table = new HashMap<>();
    private List<String> values = new ArrayList<>();
     //private List<Integer> keysTable1 = new ArrayList<>();*/
@@ -36,7 +36,7 @@ public class Task13 {
     }
 
 
-    private Integer createHashSum(String item) { // создаем хэш-сумму для элемента
+    public static Integer createHashSum(String item) { // создаем хэш-сумму для элемента
         int sum = 0;
         for (Character letter : item.toCharArray())
             sum += letter;
