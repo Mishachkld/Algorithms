@@ -10,8 +10,6 @@ public class Task2 {
     public static final List<String> NUMBERS = new ArrayList<>(Arrays.asList("0", "1", "2", "3", "4", "5", "6", "7", "8", "9"));
     public static final List<String> CALCULUS = new ArrayList<>(Arrays.asList("+", "-", "*", "/", ")", "("));
     public static HashMap<String, Integer> PRIORITY = new HashMap<>();
-    private static final int HIGH_PRIORITY = 2;
-    private static final int LOW_PRIORITY = 1;
 
 
     public static void main(String[] args) throws Exception {  /// 256+79898*(345/49)-15+5=
@@ -28,13 +26,13 @@ public class Task2 {
     }
 
     private static Stack<String> calculateExpression(List<String> expression) throws Exception {
-        Stack<String> polskaKurwa = new Stack<>();
+        Stack<String> polskaNotation = new Stack<>();
         Stack<String> calculus = new Stack<>();
         StringBuilder numberBuilder = new StringBuilder();
         for (String item : expression) {
             if (CALCULUS.contains(item)) {
                 if (!numberBuilder.toString().isEmpty()) {
-                    polskaKurwa.add(numberBuilder.toString());
+                    polskaNotation.add(numberBuilder.toString());
                     numberBuilder = new StringBuilder();
                 }
                 if (item.equals("*") || item.equals("/")) {
@@ -43,17 +41,17 @@ public class Task2 {
                         calculus.push(item);
                     else {
                         while (!calculus.isEmpty() && (calculus.peek().equals("*") || calculus.peek().equals("/")))
-                            polskaKurwa.add(calculus.pop());
+                            polskaNotation.add(calculus.pop());
                         calculus.add(item);
                     }
                 } else if (item.equals("+") || item.equals("-")) {
                     if (item.equals("-") && calculus.peek().equals("("))
-                        polskaKurwa.add("0");
+                        polskaNotation.add("0");
                     if (calculus.isEmpty())
                         calculus.add(item);
                     else {
                         while (!calculus.isEmpty() && PRIORITY.containsKey(calculus.peek())) {
-                            polskaKurwa.add(calculus.pop());
+                            polskaNotation.add(calculus.pop());
                         }
                         calculus.add(item);
                     }
@@ -61,28 +59,28 @@ public class Task2 {
                     calculus.add(item);
                 else if (CLOSE_LETTERS.contains(item)) {
                     while (!calculus.isEmpty() && !calculus.peek().equals("("))
-                        polskaKurwa.add(calculus.pop());
+                        polskaNotation.add(calculus.pop());
                     calculus.pop();
                 } else if (item.equals("=")) {
                     while (!calculus.isEmpty()) {
-                        polskaKurwa.add(calculus.pop());
+                        polskaNotation.add(calculus.pop());
                     }
                 }
             } else if (NUMBERS.contains(item)) {
                 numberBuilder.append(item);
             } else if (item.equals("=")) {
                 if (!numberBuilder.toString().isEmpty()) {
-                    polskaKurwa.add(numberBuilder.toString());
+                    polskaNotation.add(numberBuilder.toString());
                 }
                 while (!calculus.isEmpty()) {
-                    polskaKurwa.add(calculus.pop());
+                    polskaNotation.add(calculus.pop());
                 }
                 break;
             } else throw new Exception("Symbol not found");
 
         }
-        System.out.println(polskaKurwa);
-        return polskaKurwa;
+        System.out.println(polskaNotation);
+        return polskaNotation;
     }
 
 
@@ -94,8 +92,6 @@ public class Task2 {
                 item = Double.parseDouble(sItem);
                 nums.add(item);
             } else {
-                System.out.println(expression);
-                System.out.println(nums);
                 item = Double.parseDouble(makeSmthWithNumber(nums.pop(), nums.pop(), sItem));  /// (-5)+5=
                 nums.add(item);
             }
