@@ -33,7 +33,7 @@ public class Task11 {  /// Сложность алгоритма: Худшее �
         expression = quickSort(left); /// делаем все тоже самое с л.ч. и п.ч. наших массивов
         expression.add(rootItem);
         expression.addAll(quickSort(right)); // склеваем все в один массив и возвращаем
-        // System.out.println(expression);
+
         return expression;
     }
 
