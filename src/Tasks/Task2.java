@@ -22,7 +22,7 @@ public class Task2 {
         Scanner scanner = new Scanner(System.in);
         List<String> expression = List.of(scanner.nextLine().split(""));
         if (Task1.checkExpressionForStaples(expression)) {
-            calculatePolska(calculateExpression(expression));
+            System.out.println(calculatePolska(calculateExpression(expression)));
         }
 
     }
@@ -37,17 +37,18 @@ public class Task2 {
                     polskaKurwa.add(numberBuilder.toString());
                     numberBuilder = new StringBuilder();
                 }
-                if ((PRIORITY.get(item) != null) && (PRIORITY.get(item) == HIGH_PRIORITY)) {
+                if (item.equals("*") || item.equals("/")) {
                     if (calculus.isEmpty() || calculus.peek().equals("+") || calculus.peek().equals("-")
                             || calculus.peek().equals("("))
                         calculus.push(item);
                     else {
-                        while (!calculus.isEmpty() && (item.equals("*") || item.equals("/")))
+                        while (!calculus.isEmpty() && (calculus.peek().equals("*") || calculus.peek().equals("/")))
                             polskaKurwa.add(calculus.pop());
                         calculus.add(item);
                     }
                 } else if (item.equals("+") || item.equals("-")) {
-                    // добавить проверку на отрицательное число
+                    if (item.equals("-") && calculus.peek().equals("("))
+                        polskaKurwa.add("0");
                     if (calculus.isEmpty())
                         calculus.add(item);
                     else {
@@ -73,13 +74,14 @@ public class Task2 {
                 if (!numberBuilder.toString().isEmpty()) {
                     polskaKurwa.add(numberBuilder.toString());
                 }
-                while (!calculus.isEmpty()){
+                while (!calculus.isEmpty()) {
                     polskaKurwa.add(calculus.pop());
                 }
                 break;
             } else throw new Exception("Symbol not found");
 
         }
+        System.out.println(polskaKurwa);
         return polskaKurwa;
     }
 
@@ -88,12 +90,13 @@ public class Task2 {
         Stack<Double> nums = new Stack<>();
         double item;
         for (String sItem : expression) {
-            if (NUMBERS.contains(sItem)) {
+            if (NUMBERS.contains(String.valueOf(sItem.toCharArray()[0]))) {
                 item = Double.parseDouble(sItem);
                 nums.add(item);
-            }
-            else{
-                item = Double.parseDouble(makeSmthWithNumber(nums.pop(), nums.pop(), sItem));
+            } else {
+                System.out.println(expression);
+                System.out.println(nums);
+                item = Double.parseDouble(makeSmthWithNumber(nums.pop(), nums.pop(), sItem));  /// (-5)+5=
                 nums.add(item);
             }
 
@@ -103,8 +106,8 @@ public class Task2 {
 
 
     private static String makeSmthWithNumber(Double Ssecond, Double Sfirst, String move) throws Exception {
-        double first = Sfirst; //Double.parseDouble(Sfirst);
-        double second = Ssecond ;//Double.parseDouble(Ssecond);
+        double first = Sfirst;
+        double second = Ssecond;
         double result;
         switch (move) {
             case "+":
