@@ -30,34 +30,33 @@ public class Task2 {
         Stack<String> calculus = new Stack<>();
         StringBuilder numberBuilder = new StringBuilder();
         for (String item : expression) {
-            if (CALCULUS.contains(item)) {
+            if (CALCULUS.contains(item)) { /// если у нас попался какой-то из символов, содержащийся в CALCULUS
                 if (!numberBuilder.toString().isEmpty()) {
                     polskaNotation.add(numberBuilder.toString());
                     numberBuilder = new StringBuilder();
                 }
-                if (item.equals("*") || item.equals("/")) {
+                if (item.equals("*") || item.equals("/")) { /// если это операции с повышенным приоритетом
                     if (calculus.isEmpty() || calculus.peek().equals("+") || calculus.peek().equals("-")
                             || calculus.peek().equals("("))
-                        calculus.push(item);
-                    else {
+                        calculus.add(item);
+                    else { // если оператор того же приоритета или ')', то выполняем все действия с оператором того же приоритета
                         while (!calculus.isEmpty() && (calculus.peek().equals("*") || calculus.peek().equals("/")))
                             polskaNotation.add(calculus.pop());
                         calculus.add(item);
                     }
-                } else if (item.equals("+") || item.equals("-")) {
+                } else if (item.equals("+") || item.equals("-")) {/// если это операции с низким приоритетом
                     if (item.equals("-") && calculus.peek().equals("("))
-                        polskaNotation.add("0");
+                        polskaNotation.add("0"); /// добавляем ноль для чисел вида (-5)
                     if (calculus.isEmpty())
-                        calculus.add(item);
+                        calculus.add(item); /// если массив пустой, то прост добавляем символ
                     else {
-                        while (!calculus.isEmpty() && PRIORITY.containsKey(calculus.peek())) {
+                        while (!calculus.isEmpty() && PRIORITY.containsKey(calculus.peek()))
                             polskaNotation.add(calculus.pop());
-                        }
                         calculus.add(item);
                     }
-                } else if (OPEN_LETTERS.contains(item))
+                } else if (OPEN_LETTERS.contains(item)) // если это открывающияся скобка то просто кидаем ее в символы
                     calculus.add(item);
-                else if (CLOSE_LETTERS.contains(item)) {
+                else if (CLOSE_LETTERS.contains(item)) { // если это закрывающаяся скобка, то выполняем все действия до открывающеся и удаляем '('
                     while (!calculus.isEmpty() && !calculus.peek().equals("("))
                         polskaNotation.add(calculus.pop());
                     calculus.pop();
@@ -66,20 +65,17 @@ public class Task2 {
                         polskaNotation.add(calculus.pop());
                     }
                 }
-            } else if (NUMBERS.contains(item)) {
+            } else if (NUMBERS.contains(item))
                 numberBuilder.append(item);
-            } else if (item.equals("=")) {
-                if (!numberBuilder.toString().isEmpty()) {
+            else if (item.equals("=")) {
+                if (!numberBuilder.toString().isEmpty())
                     polskaNotation.add(numberBuilder.toString());
-                }
-                while (!calculus.isEmpty()) {
+                while (!calculus.isEmpty())
                     polskaNotation.add(calculus.pop());
-                }
                 break;
             } else throw new Exception("Symbol not found");
 
         }
-        System.out.println(polskaNotation);
         return polskaNotation;
     }
 
