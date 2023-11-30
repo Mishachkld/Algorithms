@@ -45,7 +45,7 @@ public class Task2 {
                         calculus.add(item);
                     }
                 } else if (item.equals("+") || item.equals("-")) {/// если это операции с низким приоритетом
-                    if (item.equals("-") && calculus.peek().equals("("))
+                    if (item.equals("-") && expression.get(expression.indexOf(item) - 1).equals("("))
                         polskaNotation.add("0"); /// добавляем ноль для чисел вида (-5)
                     if (calculus.isEmpty())
                         calculus.add(item); /// если массив пустой, то прост добавляем символ
