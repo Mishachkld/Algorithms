@@ -8,40 +8,38 @@ import java.util.List;
 public class Tree {
 
     public static void main(String[] args) {
-        Tree tree = new Tree(8, 0);
+        Tree tree = new Tree(8);
     }
 
-    private int key;
     private Tree left;
     private Tree right;
     private Integer value;
 
 
-    public Tree(Integer value, int key) {
+    public Tree(Integer value) {
         this.value = value;
-        this.key = key;
     }
 
-    public void add(Tree tree, int key, Integer value) { // добавление элемента в дерево
-        if (key < tree.key) {
+    public void add(Tree tree, Integer value) { // добавление элемента в дерево
+        if (value < tree.value) {
             if (tree.left == null)
-                this.left = new Tree(value, key);
+                this.left = new Tree(value);
             else
-                add(tree.left, key, value);
+                add(tree.left, value);
         } else {
             if (tree.right == null)
-                this.right = new Tree(value, key);
+                this.right = new Tree(value);
             else
-                add(tree.right, key, value);
+                add(tree.right, value);
         }
     }
 
-    public Tree search(Tree tree, int key) {
+    public Tree search(Tree tree) {
         if (tree == null)
             return null;
-        if (tree.key == key)
+        if (tree.value.equals(value))
             return tree;
-        return (key < tree.key) ? search(tree.left, key) : search(tree.right, key);
+        return (value < tree.value) ? search(tree.left) : search(tree.right);
     }
 
     public Tree getMin(Tree tree) {
@@ -60,11 +58,44 @@ public class Tree {
         return getMax(tree.right); // самый нижний элемент находится справа, поэтому мы идем до упора вправо
     }
 
-    public Tree delete(Tree tree, int key){
+    public Tree delete(Tree tree) {
         if (tree == null)
             return null;
-        //дописать
+        else if (value < tree.value) {
+            tree.left = delete(tree.left);
+        } else if (value > tree.value) {
+            tree.right = delete(tree.right);
+        } else {
+            if (tree.left == null || tree.right == null) {
+                tree = (tree.left == null) ? tree.right : tree.left;
+            } else {
+                Tree maxLeft = getMax(tree.left);
+                tree.value = maxLeft.value;
+                tree.right = delete(tree.right);
+            }
+        }
         return tree;
+    }
+
+    public static void printTree(Tree tree){
+        if (tree != null){
+            printTree(tree.left);
+            System.out.println(tree.value);
+            printTree(tree.right);
+        }
+    }
+
+    public static void deleteTree(Tree tree){
+        if (tree != null){
+
+        }
+
+    }
+
+    public void copyTree(Tree tree){
+        if (tree != null){
+
+        }
     }
 
 }
