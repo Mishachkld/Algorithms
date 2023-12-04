@@ -25,7 +25,7 @@ public class Tree {
             System.out.println("7. Вывод в ленейно скобочной записи");
             System.out.println("8. print stack preorder");
             System.out.println("9. exit");
-            num = scanner.nextInt();
+            num++; //= scanner.nextInt();
             switch (num) {
                 case 1:
                     System.out.println("Напишите число: ");
@@ -51,7 +51,7 @@ public class Tree {
                     tree.postorderTraversal(tree);
                     break;
                 case 7:
-                    printTree(tree);
+                    tree.printTree(tree);
                     System.out.println();
                     break;
                 case 8:
@@ -99,7 +99,7 @@ public class Tree {
             return null;
         if (tree.value.equals(value))
             return tree;
-        return (value < tree.value) ? search(tree.left, value) : search(tree.right, value);
+        return (value < tree.value) ? tree.search(tree.left, value) : tree.search(tree.right, value);
     }
 
     public void inorderTraversal(Tree tree) { // центрированный обход дерева
@@ -165,11 +165,14 @@ public class Tree {
             tree.right = tree.delete(tree.right, value);
         } else {
             if ((tree.left == null) || (tree.right == null)) {
-                tree = (tree.left == null) ? tree.right : tree.left;
+                if (tree.left == null)
+                    tree = tree.right;
+                else
+                    tree = tree.left;
             } else {
-                Tree maxLeft = tree.getMax(tree.left);
-                tree.value = maxLeft.value;
-                tree.right = tree.delete(tree.right, maxLeft.value);
+                Tree minTree = tree.getMin(tree.right);
+                tree.value = minTree.value;
+                tree.right = tree.delete(tree.right, minTree.value);
             }
         }
         return tree;
@@ -189,22 +192,23 @@ public class Tree {
     }
 
 
-    public static void printTree(Tree tree) {  // выводим дерево в скобочной записи
-        if (tree != null) {
-            System.out.print(tree.value + " ");
-            if ((tree.left != null) || (tree.right != null))
-                System.out.print(" (");
-            printTree(tree.left);
-            if ((tree.left != null) || (tree.right != null))
-                System.out.print(", ");
-            printTree(tree.right);
-            if (tree.right != null)
-                System.out.print(")");
+    public void printTree(Tree tree) {  // выводим дерево в скобочной записи
+        if (tree == null) {
+            return;
         }
+        System.out.print(tree.value);
+        if ((tree.left != null) || (tree.right != null))
+            System.out.print(" (");
+        tree.printTree(tree.left);
+        if ((tree.left != null) || (tree.right != null))
+            System.out.print(", ");
+        tree.printTree(tree.right);
+        if ((tree.left != null) || tree.right != null)
+            System.out.print(")");
     }
-
-
 }
+
+
 
 
 
