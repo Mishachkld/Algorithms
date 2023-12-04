@@ -9,7 +9,7 @@ import static Tasks.Task2.NUMBERS;
 
 public class Tree {
 
-    public static void main(String[] args) { //8 (3 (1, 6 (4,7)), 10 (, 14(13,)))
+    public static void main(String[] args) { //d
         Tree tree = new Tree(null);
         tree.readTree(tree, Task1.scanConsoleString());
         Scanner scanner = new Scanner(System.in);
@@ -25,7 +25,7 @@ public class Tree {
             System.out.println("7. Вывод в ленейно скобочной записи");
             System.out.println("8. print stack preorder");
             System.out.println("9. exit");
-            num++; //= scanner.nextInt();
+            num= scanner.nextInt();
             switch (num) {
                 case 1:
                     System.out.println("Напишите число: ");
