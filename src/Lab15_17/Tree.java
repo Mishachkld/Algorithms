@@ -13,10 +13,8 @@ public class Tree {
     public static void main(String[] args) { //8 (3 (1, 6 (4,7)), 10 (, 14(13,)))
         Tree tree = new Tree(null);
         tree.readTree(tree, Task1.scanConsoleString());
-        tree.inorderTraversal(tree);
-        printTree(tree);
         Scanner scanner = new Scanner(System.in);
-        int num = 9;
+        int num = 0;
         while (num != 9) {
             System.out.println("Действия с деревом:");
             System.out.println("1. insert");
@@ -36,21 +34,30 @@ public class Tree {
                     break;
                 case 2:
                     System.out.println("Напишитие число: ");
-                    tree.delete()
+                    tree.delete(tree, scanner.nextInt());
                     break;
                 case 3:
+                    System.out.println("Напишитие число: ");
+                    System.out.println(tree.search(tree, scanner.nextInt()).value);
                     break;
                 case 4:
+                    tree.preorderTraversal(tree);
+                    System.out.println();
                     break;
                 case 5:
+                    tree.inorderTraversal(tree);
+                    System.out.println();
                     break;
                 case 6:
+                    tree.postorderTraversal(tree);
                     break;
                 case 7:
+                    printTree(tree);
+                    System.out.println();
                     break;
                 case 8:
-                    break;
-                case 9:
+                    tree.stackPreorderTraversal(tree);
+                    System.out.println();
                     break;
             }
 
@@ -126,7 +133,7 @@ public class Tree {
             if (!stack.isEmpty())
                 tree = stack.pop();
             while (tree != null) {
-                System.out.println(tree.value + " ");
+                System.out.print(tree.value + " ");
                 if (tree.right != null)
                     stack.add(tree.right);
                 tree = tree.left;
