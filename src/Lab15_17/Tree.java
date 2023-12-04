@@ -2,7 +2,6 @@ package Lab15_17;
 
 
 import Tasks.Task1;
-import Tasks.Task2;
 
 import java.util.*;
 
@@ -16,14 +15,14 @@ public class Tree {
         Scanner scanner = new Scanner(System.in);
         int num = 0;
         while (num != 9) {
-            System.out.println("Действия с деревом:");
-            System.out.println("1. insert");
-            System.out.println("2. delete");
-            System.out.println("3. search");
+            System.out.println("\nДействия с деревом:");
+            System.out.println("1. Добавление элемента");
+            System.out.println("2. Удаление");
+            System.out.println("3. Поиск");
             System.out.println("4. print preorder");
             System.out.println("5. print inorder");
             System.out.println("6. print postorder");
-            System.out.println("7. print with linear bracket view");
+            System.out.println("7. Вывод в ленейно скобочной записи");
             System.out.println("8. print stack preorder");
             System.out.println("9. exit");
             num = scanner.nextInt();
@@ -103,7 +102,7 @@ public class Tree {
         return (value < tree.value) ? search(tree.left, value) : search(tree.right, value);
     }
 
-    public void inorderTraversal(Tree tree) {
+    public void inorderTraversal(Tree tree) { // центрированный обход дерева
         if (tree == null)
             return;
         tree.inorderTraversal(tree.left);
@@ -111,7 +110,7 @@ public class Tree {
         tree.inorderTraversal(tree.right);
     }
 
-    public void preorderTraversal(Tree tree) {
+    public void preorderTraversal(Tree tree) {  // прямой обход дерева
         if (tree != null) {
             System.out.print(tree.value + " ");
             tree.preorderTraversal(tree.left);
@@ -119,7 +118,7 @@ public class Tree {
         }
     }
 
-    public void postorderTraversal(Tree tree) {
+    public void postorderTraversal(Tree tree) { // обратный обход дерева
         if (tree != null) {
             tree.postorderTraversal(tree.left);
             tree.postorderTraversal(tree.right);
@@ -127,7 +126,7 @@ public class Tree {
         }
     }
 
-    public void stackPreorderTraversal(Tree tree) { /// нерекурсивный обход дерева
+    public void stackPreorderTraversal(Tree tree) { /// Не рекурсивный прямой обход
         Stack<Tree> stack = new Stack<>();
         while (tree != null || !stack.isEmpty()) {
             if (!stack.isEmpty())
@@ -161,22 +160,22 @@ public class Tree {
         if (tree == null)
             return null;
         else if (value < tree.value) {
-            tree.left = delete(tree.left, value);
+            tree.left = tree.delete(tree.left, value);
         } else if (value > tree.value) {
-            tree.right = delete(tree.right, value);
+            tree.right = tree.delete(tree.right, value);
         } else {
-            if (tree.left == null || tree.right == null) {
+            if ((tree.left == null) || (tree.right == null)) {
                 tree = (tree.left == null) ? tree.right : tree.left;
             } else {
-                Tree maxLeft = getMax(tree.left);
+                Tree maxLeft = tree.getMax(tree.left);
                 tree.value = maxLeft.value;
-                tree.right = delete(tree.right, maxLeft.value);
+                tree.right = tree.delete(tree.right, maxLeft.value);
             }
         }
         return tree;
     }
 
-    public void readTree(Tree tree, List<String> expression) {
+    public void readTree(Tree tree, List<String> expression) {  // считываем дерево
         StringBuilder builder = new StringBuilder();
         for (String item : expression) {
             if (NUMBERS.contains(item)) {
@@ -190,7 +189,7 @@ public class Tree {
     }
 
 
-    public static void printTree(Tree tree) {
+    public static void printTree(Tree tree) {  // выводим дерево в скобочной записи
         if (tree != null) {
             System.out.print(tree.value + " ");
             if ((tree.left != null) || (tree.right != null))
