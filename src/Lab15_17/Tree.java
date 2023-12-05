@@ -25,7 +25,7 @@ public class Tree {
             System.out.println("7. Вывод в ленейно скобочной записи");
             System.out.println("8. print stack preorder");
             System.out.println("9. exit");
-            num= scanner.nextInt();
+            num = scanner.nextInt();
             switch (num) {
                 case 1:
                     System.out.println("Напишите число: ");
@@ -37,7 +37,10 @@ public class Tree {
                     break;
                 case 3:
                     System.out.println("Напишитие число: ");
-                    System.out.println(tree.search(tree, scanner.nextInt()).value);
+                    Tree searchTree = tree.search(tree, scanner.nextInt());
+                    if (searchTree != null)
+                        System.out.println(searchTree.value);
+                    else System.out.println("not found");
                     break;
                 case 4:
                     tree.preorderTraversal(tree);
