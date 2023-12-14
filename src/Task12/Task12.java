@@ -13,7 +13,7 @@ public class Task12 {
 
     public static void main(String[] args) throws IOException { // 15 61616 4185 41841664 84 8 48 9
         // List<Integer> expression = Task1.scanConsole();
-        multiphaseSort("/input.txt", 5);
+        multiphaseSort("/input.txt", 4);
     }
 
     private static void createFiles(int count) throws IOException {
@@ -28,16 +28,11 @@ public class Task12 {
         List<String> strArray;
         List<Integer> result = new ArrayList<>();
         String path = PATH + "/" + "ntf" + ".txt";
-       /* StringBuilder builder = new StringBuilder();
-        BufferedReader reader = new BufferedReader(new FileReader(PATH + inputPath));
-                size = strArray.size() / size;
-*/
+
         int counter = 0;
         BufferedReader reader = new BufferedReader(new FileReader(PATH + inputPath));
         strArray = new ArrayList<>(List.of(reader.readLine().split(" ")));  /// прочитали с файла числа
-        System.out.println(strArray);
         reader.close();
-        //createFiles(size);
         List<Integer> array = new ArrayList<>();
         for (String item : strArray)
             result.add(Integer.valueOf(item));
@@ -51,7 +46,6 @@ public class Task12 {
                 for (Integer item : array) {
                     builder.append(item).append(" ");
                 }
-                System.out.println(builder);
                 array.clear();
                 counter++;
                 writeInFile(path, builder.toString());
@@ -67,27 +61,8 @@ public class Task12 {
             for (Integer item : array) {
                 builder.append(item).append(" ");
             }
-            System.out.println(builder);
             writeInFile(path, builder.toString());
         }
-
-       /* strArray = new ArrayList<>(List.of(reader.readLine().split(" ")));  /// прочитали с файла числа
-        reader.close();
-        String path = PATH + "/" + 1 + ".txt";
-        for (String item : strArray)
-            result.add(Integer.valueOf(item));
-
-        for (Integer item : Task11.quickSort(new ArrayList<>(result.subList(0, strArray.size() / 2)))) {
-            builder.append(item).append(" ");
-        }
-        writeInFile(path, builder.toString());
-        result.subList(0, strArray.size() / 2).clear();
-        builder = new StringBuilder();
-        for (Integer item : Task11.quickSort(result)) {
-            builder.append(item).append(" ");
-        }
-        path = PATH + "/" + 2 + ".txt";
-        writeInFile(path, builder.toString());*/
 
         boolean flag = true;
         int minItem = Integer.MAX_VALUE;
@@ -120,15 +95,12 @@ public class Task12 {
             }
             if (!tempArray.isEmpty()) {
                 tempArray.remove(0);
-                System.out.println(tempArray);
                 writeInFile(pathRemoveFile, createString(tempArray));
             }
             minItem = Integer.MAX_VALUE;
-
         }
         outWriter.close();
     }
-
 
     private static void writeInFile(String path, String expression) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(path));
