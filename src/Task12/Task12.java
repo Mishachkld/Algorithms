@@ -17,10 +17,10 @@ public class Task12 {
     }
 
     private static void createFiles() throws IOException {
-        File file1 = new File(PATH + "/1.txt");
-        File file2 = new File(PATH + "/2.txt");
-        file1.createNewFile();
-        file2.createNewFile();
+        for (int i = 1; i < COUNT_OF_FILES + 1; i++) {
+            File file = new File(PATH + "/1.txt");
+            file.createNewFile();
+        }
     }
 
     public static void multiphaseSort(String inputPath, String file1Path, String file2Path) throws IOException {
@@ -51,33 +51,38 @@ public class Task12 {
         boolean flag = true;
         int minItem = Integer.MAX_VALUE;
         int firstItem;
-        int num = 0;
+        String pathRemoveFile = PATH + "/" + "notFoundTXT" + ".txt";
         BufferedWriter outWriter = new BufferedWriter(new FileWriter(PATH + "/output.txt"));
         while (flag) {
             flag = false;
-            for (int i = 0; i < COUNT_OF_FILES; i++) {
-                path = PATH + "/" + (i + 1) + ".txt";
+            List<String> tempArray = new ArrayList<>();
+            for (int i = 1; i < COUNT_OF_FILES + 1; i++) {
+                path = PATH + "/" + (i) + ".txt";
                 reader = new BufferedReader(new FileReader(path));
                 String item;
                 if ((item = reader.readLine()) != null)
                     strArray = new ArrayList<>(List.of(item.split(" ")));
+                else continue;
                 reader.close();
                 firstItem = Integer.parseInt(strArray.get(0));
                 if (firstItem <= minItem) {
                     flag = true;
                     minItem = firstItem;
-                    path = PATH + "/" + (i + 1) + ".txt";
+                    pathRemoveFile = path;
+                    tempArray = new ArrayList<>(strArray);
                 }
-
             }
             if (minItem != Integer.MAX_VALUE) {
                 outWriter.write(String.valueOf(minItem));
                 outWriter.write(" ");
                 outWriter.flush();
             }
-            strArray.remove(0);
-            writeInFile(path, createString(strArray));
+            if (!tempArray.isEmpty()) {
+                tempArray.remove(0);
+                writeInFile(pathRemoveFile, createString(tempArray));
+            }
             minItem = Integer.MAX_VALUE;
+
         }
         outWriter.close();
     }
