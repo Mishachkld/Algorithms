@@ -13,26 +13,61 @@ public class Task12 {
 
     public static void main(String[] args) throws IOException { // 15 61616 4185 41841664 84 8 48 9
         // List<Integer> expression = Task1.scanConsole();
-        multiphaseSort("/input.txt", "/1.txt", "/2.txt");
+        multiphaseSort("/input.txt", 5);
     }
 
-    private static void createFiles() throws IOException {
-        for (int i = 1; i < COUNT_OF_FILES + 1; i++) {
-            File file = new File(PATH + "/1.txt");
+    private static void createFiles(int count) throws IOException {
+        for (int i = 1; i < count + 1; i++) {
+            File file = new File(PATH + "/" + i + ".txt");
             file.createNewFile();
         }
     }
 
-    public static void multiphaseSort(String inputPath, String file1Path, String file2Path) throws IOException {
-        createFiles();
+    public static void multiphaseSort(String inputPath, int size) throws IOException {
         List<String> strArray;
         List<Integer> result = new ArrayList<>();
-        StringBuilder builder = new StringBuilder();
+        String path;
+       /* StringBuilder builder = new StringBuilder();
+        BufferedReader reader = new BufferedReader(new FileReader(PATH + inputPath));
+                size = strArray.size() / size;
+*/
 
         BufferedReader reader = new BufferedReader(new FileReader(PATH + inputPath));
         strArray = new ArrayList<>(List.of(reader.readLine().split(" ")));  /// прочитали с файла числа
+        System.out.println(strArray);
         reader.close();
-        String path = PATH + file1Path;
+        createFiles(size);
+        for (String item : strArray)
+            result.add(Integer.valueOf(item));
+
+
+        for (int i = 1; i < size + 1; i++) {
+            path = PATH + "/" + i + ".txt";
+            List<Integer> array = new ArrayList<>();
+            if (result.size() >= size) {
+                for (int j = 0; j < size; j++) {
+                    array.add(result.get(j));
+                }
+                result.subList(0, size).clear();
+            }
+            else{
+                array.addAll(result);
+
+            }
+            array = Task11.quickSort(array);
+            StringBuilder builder = new StringBuilder();
+
+
+            for (Integer item : array) {
+                builder.append(item).append(" ");
+            }
+            writeInFile(path, builder.toString());
+            System.out.println(builder);
+        }
+
+       /* strArray = new ArrayList<>(List.of(reader.readLine().split(" ")));  /// прочитали с файла числа
+        reader.close();
+        String path = PATH + "/" + 1 + ".txt";
         for (String item : strArray)
             result.add(Integer.valueOf(item));
 
@@ -45,8 +80,8 @@ public class Task12 {
         for (Integer item : Task11.quickSort(result)) {
             builder.append(item).append(" ");
         }
-        path = PATH + file2Path;
-        writeInFile(path, builder.toString());
+        path = PATH + "/" + 2 + ".txt";
+        writeInFile(path, builder.toString());*/
 
         boolean flag = true;
         int minItem = Integer.MAX_VALUE;
@@ -56,7 +91,7 @@ public class Task12 {
         while (flag) {
             flag = false;
             List<String> tempArray = new ArrayList<>();
-            for (int i = 1; i < COUNT_OF_FILES + 1; i++) {
+            for (int i = 1; i < size + 1; i++) {
                 path = PATH + "/" + (i) + ".txt";
                 reader = new BufferedReader(new FileReader(path));
                 String item;
