@@ -22,7 +22,7 @@ public class Task1 {
         List<Integer> expression = new ArrayList<>();
         System.out.print("Введите строку: ");
         Scanner scanner = new Scanner(System.in);
-        List<String> expressionString = new ArrayList<>(List.of(scanner.nextLine().split("")));
+        List<String> expressionString = new ArrayList<>(List.of(scanner.nextLine().split(" ")));
         for (String item : expressionString) {
             expression.add(Integer.valueOf(item));
         }
