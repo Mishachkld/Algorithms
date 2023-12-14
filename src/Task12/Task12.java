@@ -24,45 +24,51 @@ public class Task12 {
     }
 
     public static void multiphaseSort(String inputPath, int size) throws IOException {
+        new File(PATH + "/" + 0 + ".txt").createNewFile();
         List<String> strArray;
         List<Integer> result = new ArrayList<>();
-        String path;
+        String path = PATH + "/" + "ntf" + ".txt";
        /* StringBuilder builder = new StringBuilder();
         BufferedReader reader = new BufferedReader(new FileReader(PATH + inputPath));
                 size = strArray.size() / size;
 */
-
+        int counter = 0;
         BufferedReader reader = new BufferedReader(new FileReader(PATH + inputPath));
         strArray = new ArrayList<>(List.of(reader.readLine().split(" ")));  /// прочитали с файла числа
         System.out.println(strArray);
         reader.close();
-        createFiles(size);
+        //createFiles(size);
+        List<Integer> array = new ArrayList<>();
         for (String item : strArray)
             result.add(Integer.valueOf(item));
-
-
-        for (int i = 1; i < size + 1; i++) {
-            path = PATH + "/" + i + ".txt";
-            List<Integer> array = new ArrayList<>();
-            if (result.size() >= size) {
-                for (int j = 0; j < size; j++) {
-                    array.add(result.get(j));
+        for (int i = 0; i < result.size(); i++) {
+            path = PATH + "/" + counter + ".txt";
+            if (array.size() >= size) {
+                new File(path).createNewFile();
+                StringBuilder builder = new StringBuilder();
+                array.add(result.get(i));
+                array = Task11.quickSort(array);
+                for (Integer item : array) {
+                    builder.append(item).append(" ");
                 }
-                result.subList(0, size).clear();
+                System.out.println(builder);
+                array.clear();
+                counter++;
+                writeInFile(path, builder.toString());
+            } else {
+                array.add(result.get(i));
             }
-            else{
-                array.addAll(result);
-
-            }
-            array = Task11.quickSort(array);
+        }
+        if (!array.isEmpty()) {
+            path = PATH + "/" + counter + ".txt";
+            new File(path).createNewFile();
             StringBuilder builder = new StringBuilder();
-
-
+            array = Task11.quickSort(array);
             for (Integer item : array) {
                 builder.append(item).append(" ");
             }
-            writeInFile(path, builder.toString());
             System.out.println(builder);
+            writeInFile(path, builder.toString());
         }
 
        /* strArray = new ArrayList<>(List.of(reader.readLine().split(" ")));  /// прочитали с файла числа
@@ -91,7 +97,7 @@ public class Task12 {
         while (flag) {
             flag = false;
             List<String> tempArray = new ArrayList<>();
-            for (int i = 1; i < size + 1; i++) {
+            for (int i = 0; i < counter + 1; i++) {
                 path = PATH + "/" + (i) + ".txt";
                 reader = new BufferedReader(new FileReader(path));
                 String item;
@@ -114,6 +120,7 @@ public class Task12 {
             }
             if (!tempArray.isEmpty()) {
                 tempArray.remove(0);
+                System.out.println(tempArray);
                 writeInFile(pathRemoveFile, createString(tempArray));
             }
             minItem = Integer.MAX_VALUE;
