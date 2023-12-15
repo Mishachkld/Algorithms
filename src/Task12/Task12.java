@@ -28,20 +28,17 @@ public class Task12 {
         List<String> strArray;
         List<Integer> result = new ArrayList<>();
         String path = PATH + "/" + "ntf" + ".txt";
+        String line;
 
         int counter = 0;
         BufferedReader reader = new BufferedReader(new FileReader(PATH + inputPath));
-        strArray = new ArrayList<>(List.of(reader.readLine().split(" ")));  /// прочитали с файла числа
-        reader.close();
         List<Integer> array = new ArrayList<>();
-        for (String item : strArray)
-            result.add(Integer.valueOf(item));
-        for (int i = 0; i < result.size(); i++) {
+        while ((line = reader.readLine()) != null) {
+            Integer integer = Integer.parseInt(line);
             path = PATH + "/" + counter + ".txt";
             if (array.size() >= size) {
                 new File(path).createNewFile();
                 StringBuilder builder = new StringBuilder();
-                array.add(result.get(i));
                 array = Task11.quickSort(array);
                 for (Integer item : array) {
                     builder.append(item).append(" ");
@@ -49,9 +46,9 @@ public class Task12 {
                 array.clear();
                 counter++;
                 writeInFile(path, builder.toString());
-            } else {
-                array.add(result.get(i));
             }
+            array.add(integer);
+
         }
         if (!array.isEmpty()) {
             path = PATH + "/" + counter + ".txt";
@@ -63,6 +60,7 @@ public class Task12 {
             }
             writeInFile(path, builder.toString());
         }
+        reader.close();
 
         boolean flag = true;
         int minItem = Integer.MAX_VALUE;
