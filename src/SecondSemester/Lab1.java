@@ -54,17 +54,15 @@ public class Lab1 {
             int right = 0;
             for (int i = 1; i < numbersOfPoints.size(); i++) {
                 double rotation = rotate(points.get(hull.get(hull.size() - 1)),
-                                         points.get(numbersOfPoints.get(right)),
-                                         points.get(numbersOfPoints.get(i)));
-                if (rotation < 0){
-                    System.out.println(rotation);
+                        points.get(numbersOfPoints.get(right)),
+                        points.get(numbersOfPoints.get(i)));
+                if (rotation < 0) {
                     right = i;
                 }
             }
-            if (numbersOfPoints.get(right).equals(hull.get(0))){
+            if (numbersOfPoints.get(right).equals(hull.get(0))) {
                 break;
-            }
-            else{
+            } else {
                 hull.add(numbersOfPoints.get(right));
                 numbersOfPoints.remove(right);
             }
@@ -74,8 +72,6 @@ public class Lab1 {
     }
 
 
-
-
     public static void main(String[] args) {
         List<Point> dots = addPoints();
         System.out.println(jarvisCalculate(dots));
@@ -83,7 +79,9 @@ public class Lab1 {
 
 
     private static List<Point> addPoints() {
-        return new ArrayList<>(Arrays.asList(new Point(1, 1), new Point(2, -2), new Point(-1, -4), new Point(-1, 1), new Point(-2, -3),
-                new Point(0, -1), new Point(0, -2), new Point(1, -1)));
+        return new ArrayList<>(Arrays.asList(new Point(1, 2), new Point(3, 5), new Point(6, 1), new Point(8, 4), new Point(10, 7),
+                new Point(7, 9), new Point(4, 8), new Point(2, 6), new Point(9, 8), new Point(4, 3), new Point(5, 7)));
+        /*return new ArrayList<>(Arrays.asList(new Point(1, 1), new Point(2, -2), new Point(-1, -4), new Point(-1, 1), new Point(-2, -3),
+                new Point(0, -1), new Point(0, -2), new Point(1, -1)));*/
     }
 }
