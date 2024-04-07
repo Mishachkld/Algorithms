@@ -7,19 +7,18 @@ import static SecondSemester.Lab2.Lab2.*;
 
 public class Lab3 {
     private static final int MAX_N = 1000;
-    private static List<Boolean> used = new ArrayList<>(Collections.nCopies(MAX_N, false));
-    private static List<Integer> components = new ArrayList<>();
+    private static final List<Boolean> used = new ArrayList<>(Collections.nCopies(MAX_N, false));
+    private static final List<Integer> components = new ArrayList<>();
 
-    public static void bfs(int size, List<List<Integer>> graph) {
+    public static void bfs(int start, List<List<Integer>> graph) {  /// start - начальная вершина
         Stack<Integer> queue = new Stack<>();
-        queue.add(size);
-        used.set(size, true);
-        components.add(size);
+        queue.add(start);
+        used.set(start, true);
+        components.add(start);
         int front = 0;
 
         while (front < queue.size()) {
-            int current = queue.get(front);
-            front++;
+            int current = queue.get(front++);
             for (Integer item : graph.get(current)) {
                 if (!used.get(item)) {
                     used.set(item, true);
@@ -31,12 +30,11 @@ public class Lab3 {
     }
 
     private static void findComponents(int number, List<List<Integer>> graph) {
-        int n = number;
-        for (int i = 0; i < n; i++) {
+        /*for (int i = 0; i < n; i++) {
             used.set(i, false);
-        }
+        }*/
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < number; i++) {
             if (!used.get(i)) {
                 components.clear();
                 bfs(i, graph);
@@ -70,3 +68,4 @@ public class Lab3 {
         findComponents(graph.size(), graph);
     }
 }
+/// Компоненты: 0 1 3 8 2 7 9 5 4 6

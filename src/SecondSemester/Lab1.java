@@ -9,7 +9,8 @@ import java.util.List;
 
 
 public class Lab1 {
-
+    // сложность N*H - H - коллличество точек в оболочке
+    // N- колличество всех точек. Худший случай, если все точки вошли в оболочку N^2
     public static class Point {
         public int x;
         public int y;

@@ -44,7 +44,7 @@ public class Lab2 {
         return graph;
     }
 
-    public static int bfs(List<Lab1.Point> graph, int source, int destination) {
+    public static int bfs(List<Lab1.Point> graph, int source, int finish) {
         List<Integer> dist = new ArrayList<>();
 
         for (int i = 0; i < graph.size(); i++) {
@@ -65,7 +65,7 @@ public class Lab2 {
                 }
             }
         }
-        return dist.get(destination);
+        return dist.get(finish);
     }
 
     public static void main(String[] args) throws IOException {
