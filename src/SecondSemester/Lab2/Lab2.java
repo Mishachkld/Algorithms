@@ -8,11 +8,11 @@ import java.util.List;
 
 public class Lab2 {
 
-    private static final String PATH_TO_INPUT_FILE = "src/SecondSemester/Lab2/input.txt";
+    public static final String PATH_TO_INPUT_FILE = "src/SecondSemester/Lab2/input.txt";
 
-    private static List<List<Integer>> readMatrixFromFile() throws IOException {
+    public static List<List<Integer>> readMatrixFromFile(String path) throws IOException {
         List<List<String>> matrixString = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new FileReader(PATH_TO_INPUT_FILE));
+        BufferedReader reader = new BufferedReader(new FileReader(path));
         String lineFromFile;
         while ((lineFromFile = reader.readLine()) != null) {
             matrixString.add(new ArrayList<>(List.of(lineFromFile.split(" "))));
@@ -20,7 +20,7 @@ public class Lab2 {
         return convertToIntegerArray(matrixString);
     }
 
-    private static List<List<Integer>> convertToIntegerArray(List<List<String>> matrixString) {
+    public static List<List<Integer>> convertToIntegerArray(List<List<String>> matrixString) {
         List<List<Integer>> matrix = new ArrayList<>();
         for (List<String> line : matrixString) {
             matrix.add(new ArrayList<>());
@@ -31,7 +31,7 @@ public class Lab2 {
         return matrix;
     }
 
-    private static List<Lab1.Point> convertMatrixToGraph(List<List<Integer>> matrix) {
+    public static List<Lab1.Point> convertMatrixToGraph(List<List<Integer>> matrix) {
         List<Lab1.Point> graph = new ArrayList<>();
         for (int i = 0; i < matrix.size(); i++) {
             for (int j = 0; j < matrix.get(i).size(); j++) {
@@ -69,7 +69,7 @@ public class Lab2 {
     }
 
     public static void main(String[] args) throws IOException {
-        List<List<Integer>> matrix = readMatrixFromFile();
+        List<List<Integer>> matrix = readMatrixFromFile(PATH_TO_INPUT_FILE);
         System.out.println(bfs(convertMatrixToGraph(matrix), 0, 5));
     }
 
