@@ -30,8 +30,8 @@ public class Lab1 {
         return (rightPoint.x - startPoint.x) * (tecPoint.y - rightPoint.y) - (rightPoint.y - startPoint.y) * (tecPoint.x - rightPoint.x);
     }
 
-    public static List<Integer> jarvisCalculate(List<Point> points) {
-        List<Integer> hull = new ArrayList<>();
+    public static List<Integer> jarvisCalculate(List<Point> points) { //
+        List<Integer> hull = new ArrayList<>(); // в правильном порядке хранятся вершины
         List<Point> dots = new ArrayList<>(points);
 
 
@@ -45,15 +45,16 @@ public class Lab1 {
             int numberOfTecPoint = numbersOfPoints.get(i);
             if (points.get(numberOfTecPoint).x < points.get(numbersOfPoints.get(0)).x) {
                 Collections.swap(numbersOfPoints, i, 0);
-            }
+            } /// Ещем самую левую точку
         }
-        hull.add(numbersOfPoints.get(0));
+        hull.add(numbersOfPoints.get(0));   // делаем стартовую вершину текущей
         numbersOfPoints.remove(0);
         numbersOfPoints.add(hull.get(0));
 
         while (true) {
             int right = 0;
-            for (int i = 1; i < numbersOfPoints.size(); i++) {
+            for (int i = 1; i < numbersOfPoints.size(); i++) {  // ищем самую точку из points, относительно последней вершины из hull
+                                                                // до тех пор, пока она не будет стартовой
                 double rotation = rotate(points.get(hull.get(hull.size() - 1)),
                         points.get(numbersOfPoints.get(right)),
                         points.get(numbersOfPoints.get(i)));
