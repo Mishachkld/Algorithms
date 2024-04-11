@@ -4,6 +4,7 @@ import SecondSemester.Lab1;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lab2 {
@@ -44,23 +45,19 @@ public class Lab2 {
         return graph;
     }
 
-    public static int bfs(List<Lab1.Point> graph, int source, int finish) {
-        List<Integer> dist = new ArrayList<>();
+    public static int bfs(List<Lab1.Point> graph, int start, int finish) {
+        List<Integer> dist = new ArrayList<>(Collections.nCopies(graph.size(), null)); // массив расстояний
+        dist.set(start, 0);
+        List<Integer> queue = new ArrayList<>(List.of(0)); // очередь вершин, требующих обработку
 
-        for (int i = 0; i < graph.size(); i++) {
-            dist.add(null);
-        }
-        dist.set(source, 0);
-        List<Integer> queue = new ArrayList<>(List.of(0));
-
-        while (!queue.isEmpty()) {
-            int u = queue.remove(0);
-            for (Lab1.Point edge : graph) {
-                if (edge.x == u) {
-                    int v = edge.y;
-                    if (dist.get(v) == null) {
-                        dist.set(v, dist.get(u) + 1);
-                        queue.add(v);
+        while (!queue.isEmpty()) {              // в X хранится текущая вершина, в Y та, с которой граф связан
+            int u = queue.remove(0);      // получаем вершину, которую будем в первую очередь обрабатывать
+            for (Lab1.Point edge : graph) {     // Просматриваем все соседнии вершины
+                if (edge.x == u) {              // т.е. если мы нашли вершину, которую мы сейчас доставли из очереди то ее рассматриваем
+                    int v = edge.y;             // получили соседа текущей вершины
+                    if (dist.get(v) == null) {  // Если сосед еще не посещен
+                        dist.set(v, dist.get(u) + 1);  // то отмечаем как посещеным и записываем расстояние на 1 больше текущей
+                        queue.add(v);           // добваляем в очредь новую вершину для рассмотрения
                     }
                 }
             }
@@ -70,7 +67,8 @@ public class Lab2 {
 
     public static void main(String[] args) throws IOException {
         List<List<Integer>> matrix = readMatrixFromFile(PATH_TO_INPUT_FILE);
-        System.out.println(bfs(convertMatrixToGraph(matrix), 0, 5));
+        System.out.println(bfs(convertMatrixToGraph(matrix), 0, 3));
+        outGraph(convertMatrixToGraph(matrix));
     }
 
     public static void outMatrix(List<List<Integer>> matrix) {

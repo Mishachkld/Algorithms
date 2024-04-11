@@ -18,43 +18,37 @@ public class Lab3 {
         int front = 0;
 
         while (front < queue.size()) {
-            int current = queue.get(front++);
-            for (Integer item : graph.get(current)) {
-                if (!used.get(item)) {
-                    used.set(item, true);
-                    queue.add(item);
-                    components.add(item);
+            int current = queue.get(front++);          // берем текущую вершину
+            for (Integer item : graph.get(current)) {  // рассматриваем все связанные вершины
+                if (!used.get(item)) {                 // если вершина не посещена
+                    used.set(item, true);              // отмечаем эту вершину посещенной
+                    queue.add(item);                   // добавляем эту вершину для рассмотрения
+                    components.add(item);              // Добавляем в массив компонентов эту вершину
                 }
             }
         }
     }
 
-    private static void findComponents(int number, List<List<Integer>> graph) {
-        /*for (int i = 0; i < n; i++) {
-            used.set(i, false);
-        }*/
-
+    private static void findComponents(int number, List<List<Integer>> graph) { // Проверка достижимости вершины
         for (int i = 0; i < number; i++) {
-            if (!used.get(i)) {
+            if (!used.get(i)) {      // если текущай вершина не отмеченна
                 components.clear();
                 bfs(i, graph);
-
-                System.out.print("Компонент: ");
-                for (Integer item: components){
+                System.out.print("Компоненты: ");
+                for (Integer item: components){  // выводим текущии компоненты графа
                     System.out.print(item + " ");
                 }
                 System.out.println();
             }
         }
-
     }
 
-    private static List<List<Integer>> numerateMatrix(List<List<Integer>> matrix) {
+    private static List<List<Integer>> numerateMatrix(List<List<Integer>> matrix) {  /// Сделали массив из массивов, элементы которого являются точки  которые можно попасть из текущего положения
         List<List<Integer>> graph = new ArrayList<>();
         for (int i = 0; i < matrix.size(); i++) {
             graph.add(new ArrayList<>());
             for (int j = 0; j < matrix.get(i).size(); j++) {
-                if (matrix.get(i).get(j) == 1) {
+                if (matrix.get(i).get(j) == 1) { // заполняем элементами, в которые можно попасть из текущего элмента графа
                     graph.get(i).add(j);
                 }
             }
