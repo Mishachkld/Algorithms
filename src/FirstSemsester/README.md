@@ -27,5 +27,5 @@
 * Сортировка
 ### [11.Task11](https://github.com/Mishachkld/Algorithms/blob/master/src/Tasks/Task11.java)
 * Сортировка
-### [12.Task12](https://github.com/Mishachkld/Algorithms/blob/master/src/Tasks/Task12.java)
+### [12.FirstSemsester.Task12](https://github.com/Mishachkld/Algorithms/blob/master/src/Tasks/Task12.java)
 * Сортировка
