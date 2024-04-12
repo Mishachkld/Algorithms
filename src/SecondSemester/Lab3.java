@@ -7,8 +7,8 @@ import static SecondSemester.Lab2.Lab2.*;
 
 public class Lab3 {
     private static final int MAX_N = 1000;
-    private static final List<Boolean> used = new ArrayList<>(Collections.nCopies(MAX_N, false));
-    private static final List<Integer> components = new ArrayList<>();
+    public static List<Boolean> used = new ArrayList<>(Collections.nCopies(MAX_N, false));
+    public static final List<Integer> components = new ArrayList<>();
 
     public static void bfs(int start, List<List<Integer>> graph) {  /// start - начальная вершина
         Stack<Integer> queue = new Stack<>();

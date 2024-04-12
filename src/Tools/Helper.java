@@ -3,14 +3,17 @@ package Tools;
 import Tools.HelpClasses.Point;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Helper {
 
-    public static void writeInFile(HashMap<Integer, List<String>> expression, String Path ) throws IOException {
+    public static final String PATH_TO_INPUT_FILE = "src/SecondSemester/Lab2/input.txt";
+    private static final int MAX_N = 1000;
+    public static List<Boolean> used = new ArrayList<>(Collections.nCopies(MAX_N, false));
+    public static final List<Integer> components = new ArrayList<>();
+
+
+    public static void writeInFile(HashMap<Integer, List<String>> expression, String Path) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(Path));
         StringBuilder builder = new StringBuilder();
         for (Integer key : expression.keySet()) {

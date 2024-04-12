@@ -1,11 +1,11 @@
 package SecondSemester.Lab2;
 
-import SecondSemester.Lab1;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import Tools.HelpClasses.Point;
+
 
 public class Lab2 {
 
@@ -21,7 +21,7 @@ public class Lab2 {
         return convertToIntegerArray(matrixString);
     }
 
-    public static List<List<Integer>> convertToIntegerArray(List<List<String>> matrixString) {
+    private static List<List<Integer>> convertToIntegerArray(List<List<String>> matrixString) {
         List<List<Integer>> matrix = new ArrayList<>();
         for (List<String> line : matrixString) {
             matrix.add(new ArrayList<>());
@@ -32,12 +32,12 @@ public class Lab2 {
         return matrix;
     }
 
-    public static List<Lab1.Point> convertMatrixToGraph(List<List<Integer>> matrix) {
-        List<Lab1.Point> graph = new ArrayList<>();
+    public static List<Point> convertMatrixToGraph(List<List<Integer>> matrix) {
+        List<Point> graph = new ArrayList<>();
         for (int i = 0; i < matrix.size(); i++) {
             for (int j = 0; j < matrix.get(i).size(); j++) {
                 if (matrix.get(i).get(j) == 1) {
-                    graph.add(new Lab1.Point(i, j));
+                    graph.add(new Point(i, j));
                 }
             }
         }
@@ -45,14 +45,14 @@ public class Lab2 {
         return graph;
     }
 
-    public static int bfs(List<Lab1.Point> graph, int start, int finish) {
+    public static int bfs(List<Point> graph, int start, int finish) {
         List<Integer> dist = new ArrayList<>(Collections.nCopies(graph.size(), null)); // массив расстояний
         dist.set(start, 0);
         List<Integer> queue = new ArrayList<>(List.of(0)); // очередь вершин, требующих обработку
 
         while (!queue.isEmpty()) {              // в X хранится текущая вершина, в Y та, с которой граф связан
             int u = queue.remove(0);      // получаем вершину, которую будем в первую очередь обрабатывать
-            for (Lab1.Point edge : graph) {     // Просматриваем все соседнии вершины
+            for (Point edge : graph) {     // Просматриваем все соседнии вершины
                 if (edge.x == u) {              // т.е. если мы нашли вершину, которую мы сейчас доставли из очереди то ее рассматриваем
                     int v = edge.y;             // получили соседа текущей вершины
                     if (dist.get(v) == null) {  // Если сосед еще не посещен
@@ -80,8 +80,8 @@ public class Lab2 {
         }
     }
 
-    public static void outGraph(List<Lab1.Point> graph) {
-        for (Lab1.Point point : graph) {
+    public static void outGraph(List<Point> graph) {
+        for (Point point : graph) {
             System.out.print(point + " ");
         }
     }

@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static SecondSemester.Lab2.Lab2.readMatrixFromFile;
-import static SecondSemester.Lab3.*;
+import static Tools.Helper.*;
 
 public class Lab4 {
 
