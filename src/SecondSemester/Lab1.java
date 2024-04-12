@@ -81,8 +81,10 @@ public class Lab1 {
 
 
     private static List<Point> addPoints() {
-        return new ArrayList<>(Arrays.asList(new Point(1, 2), new Point(3, 5), new Point(6, 1), new Point(8, 4), new Point(10, 7),
-                new Point(7, 9), new Point(4, 8), new Point(2, 6), new Point(9, 8), new Point(4, 3), new Point(5, 7)));
+        return new ArrayList<>(Arrays.asList(new Point(0, 0), new Point(0, 100), new Point(100, 0), new Point(50, 50), new Point(10, 0),
+                new Point(0, 9), new Point(40, 8), new Point(0, 6), new Point(0, 15), new Point(3, 3), new Point(5, 7)));
+        /*return new ArrayList<>(Arrays.asList(new Point(1, 2), new Point(3, 5), new Point(6, 1), new Point(8, 4), new Point(10, 7),
+                new Point(7, 9), new Point(4, 8), new Point(2, 6), new Point(9, 8), new Point(4, 3), new Point(5, 7)));*/
         /*return new ArrayList<>(Arrays.asList(new Point(1, 1), new Point(2, -2), new Point(-1, -4), new Point(-1, 1), new Point(-2, -3),
                 new Point(0, -1), new Point(0, -2), new Point(1, -1)));*/
     }
