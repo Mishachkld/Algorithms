@@ -22,7 +22,6 @@ public class Lab4 {
                 DFS(element);
             }
         }
-
     }
 
     public static void findComponents(int numbers, List<List<Integer>> numeratedGraph) {
@@ -43,6 +42,5 @@ public class Lab4 {
     public static void main(String[] args) throws IOException {
         numeratedGraph = numerateMatrix(readMatrixFromFile(Lab2.PATH_TO_INPUT_FILE));
         findComponents(numeratedGraph.size(), numeratedGraph);
-
     }
 }

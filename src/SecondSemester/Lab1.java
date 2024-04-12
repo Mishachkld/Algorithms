@@ -1,30 +1,15 @@
 package SecondSemester;
 
-import ReadAndWriteFuncrions.Helper;
+import Tools.HelpClasses.Point;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-
 public class Lab1 {
     // сложность N*H - H - коллличество точек в оболочке
     // N- колличество всех точек. Худший случай, если все точки вошли в оболочку N^2
-    public static class Point {
-        public int x;
-        public int y;
-
-        public Point(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        @Override
-        public String toString() {
-            return "(" + x + "," + y + ")";
-        }
-    }
 
     private static double rotate(Point startPoint, Point rightPoint, Point tecPoint) {
         return (rightPoint.x - startPoint.x) * (tecPoint.y - rightPoint.y) - (rightPoint.y - startPoint.y) * (tecPoint.x - rightPoint.x);
