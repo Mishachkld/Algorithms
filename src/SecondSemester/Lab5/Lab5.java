@@ -39,13 +39,13 @@ public class Lab5 {
         int size = matrix.size();
         List<List<Integer>> graph = numerateMatrix(matrix);
         List<List<Integer>> graphH = numerateMatrix(createTranspMatrix(matrix));  // получили транспорнированную матрицу и перевели ее в граф
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {  // запускаем цикл для просмтра всех непосещенных вершин (запускаем топологическую сортировку)
             if (!used.get(i)){
                 DFS1(i, graph, stack);
             }
         }
-        used = new ArrayList<>(Collections.nCopies(size, false));
-        while (!stack.empty()){
+        used = new ArrayList<>(Collections.nCopies(size, false)); // обнуляем непосещенные вершины
+        while (!stack.empty()){ // запускаем dfs2 по непосещенным вершинам, в порядке заданным в stack
             int point = stack.pop();
             if (!used.get(point)){
                 components = new ArrayList<>();
