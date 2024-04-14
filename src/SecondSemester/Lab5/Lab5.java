@@ -41,7 +41,7 @@ public class Lab5 {
         List<List<Integer>> graphH = numerateMatrix(createTranspMatrix(matrix));  // получили транспорнированную матрицу и перевели ее в граф
         for (int i = 0; i < size; i++) {  // запускаем цикл для просмтра всех непосещенных вершин (запускаем топологическую сортировку)
             if (!used.get(i)){
-                DFS1(i, graph, stack);
+                DFS1(i, graphH, stack);
             }
         }
         used = new ArrayList<>(Collections.nCopies(size, false)); // обнуляем непосещенные вершины
