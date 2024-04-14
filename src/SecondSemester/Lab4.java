@@ -13,7 +13,7 @@ public class Lab4 {
 
     private static List<List<Integer>> numeratedGraph;
 
-    public static void DFS(int positionOfPoint) {
+    public static void DFS(int positionOfPoint) { /// сложность v(колличество врешин)* (идет по каждому ребру 2 раза) 2E => O(E + v)
         used.set(positionOfPoint, true);
         components.add(positionOfPoint);
         for (Integer element : numeratedGraph.get(positionOfPoint)) {
@@ -30,7 +30,7 @@ public class Lab4 {
                 components.clear();
                 DFS(i);
                 System.out.print("Компомненты: ");
-                for (Integer elements : components) {
+                for (Integer elements : components) { // O (V^2)
                     System.out.print(elements + " ");
                 }
                 System.out.println();

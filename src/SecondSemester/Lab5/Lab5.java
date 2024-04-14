@@ -13,7 +13,6 @@ import static Tools.Helper.*;
 public class Lab5 {
     // + функции которые преобразоывавают в numeratedGraph
     // + used; components; stack
-
     private static void DFS1(int v, List<List<Integer>> graph, Stack<Integer> stack) {
         used.set(v, true);
         for (Integer point : graph.get(v)) {
@@ -54,7 +53,6 @@ public class Lab5 {
                 sccComponents.add(components);
             }
         }
-
         return sccComponents;
     }
 
