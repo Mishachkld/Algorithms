@@ -10,7 +10,7 @@ public class Helper {
     public static final String PATH_TO_INPUT_FILE = "src/SecondSemester/Lab2/input.txt";
     private static final int MAX_N = 1000;
     public static List<Boolean> used = new ArrayList<>(Collections.nCopies(MAX_N, false));
-    public static final List<Integer> components = new ArrayList<>();
+    public static List<Integer> components = new ArrayList<>();
 
 
     public static void writeInFile(HashMap<Integer, List<String>> expression, String Path) throws IOException {
@@ -56,6 +56,7 @@ public class Helper {
             }
             System.out.println();
         }
+        System.out.println("---------------");
     }
 
     public static void outGraph(List<Point> graph) {
