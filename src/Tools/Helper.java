@@ -98,4 +98,14 @@ public class Helper {
         }
         return matrix;
     }
+
+
+    public static List<Integer> generateShuffleArray(int start, int finish){
+        List<Integer> numbersArray = new ArrayList<>();
+        for (int i = start; i < finish; i++) {
+            numbersArray.add(i);
+        }
+        Collections.shuffle(numbersArray);
+        return numbersArray;
+    }
 }
