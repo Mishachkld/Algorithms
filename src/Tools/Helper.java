@@ -99,13 +99,19 @@ public class Helper {
         return matrix;
     }
 
+    public static List<Integer> fillArray(int size){
+        List<Integer> array = new ArrayList<>();
+        for (int i = 0; i < size; i++){
+            array.add(0);
+        }
+        return array;
+    }
 
-    public static List<Integer> generateShuffleArray(int start, int finish){
+    public static List<Integer> generateNumeratedArray(int start, int finish){
         List<Integer> numbersArray = new ArrayList<>();
         for (int i = start; i < finish; i++) {
             numbersArray.add(i);
         }
-        Collections.shuffle(numbersArray);
         return numbersArray;
     }
 }
