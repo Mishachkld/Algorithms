@@ -6,14 +6,14 @@ public class TripleData<T, V, M> {
     public V second;
     public M weight;
 
-    public TripleData(T t, V v, M m) {
-        this.first = t;
-        this.second = v;
-        this.weight = m;
+    public TripleData(T first, V second, M weight) {
+        this.first = first;
+        this.second = second;
+        this.weight = weight;
     }
 
     @Override
     public String toString() {
-        return "(" + first + ", " + second + ", " + weight + ")";
+        return "\n(" + first + ", " + second + ", " + weight + ")";
     }
 }
