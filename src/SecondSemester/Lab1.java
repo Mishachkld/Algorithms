@@ -12,13 +12,13 @@ public class Lab1 {
     // N- колличество всех точек. Худший случай, если все точки вошли в оболочку N^2
 
     private static double rotate(Point startPoint, Point rightPoint, Point tecPoint) {
-        return (rightPoint.x - startPoint.x) * (tecPoint.y - rightPoint.y) - (rightPoint.y - startPoint.y) * (tecPoint.x - rightPoint.x);
+        return (rightPoint.x - startPoint.x) * (tecPoint.y - rightPoint.y) -
+                (rightPoint.y - startPoint.y) * (tecPoint.x - rightPoint.x);
     }
 
     public static List<Integer> jarvisCalculate(List<Point> points) { //
         List<Integer> hull = new ArrayList<>(); // в правильном порядке хранятся вершины
         List<Point> dots = new ArrayList<>(points);
-
 
         int lenDotsArray = dots.size();
         List<Integer> numbersOfPoints = new ArrayList<>();
@@ -33,8 +33,24 @@ public class Lab1 {
             } /// Ещем самую левую точку
         }
         hull.add(numbersOfPoints.get(0));   // делаем стартовую вершину текущей
-        numbersOfPoints.remove(0);
+        int p = numbersOfPoints.remove(0);
         numbersOfPoints.add(hull.get(0));
+
+        Point pointStart = points.get(numbersOfPoints.get(p));
+
+        /*while(true){
+            Point point = null;
+            for (Point value: points){
+                if ((point == null) || (rotate(pointStart, point, value) < 0)){
+                    point = value;
+                }
+            }
+            if (point == pointStart){
+                break;
+            }
+            point = ;
+            hull.add(points.indexOf(points.get(p)));
+        }*/
 
         while (true) {
             int right = 0;
@@ -61,6 +77,7 @@ public class Lab1 {
 
     public static void main(String[] args) {
         List<Point> dots = addPoints();
+        System.out.println(dots);
         System.out.println(jarvisCalculate(dots));
     }
 
