@@ -10,6 +10,9 @@ import java.util.List;
 
 import static Tools.Helper.*;
 
+// Рассматривается остовое дерево (из любой части графа можно попасть в любую часть графа)
+// суть алгоритма заключается в том, чтобы рассматривать ребро минимальной стоимости соединящей на каждом шаге вершину, которая входит в множество u
+// и рассматривать одну вершину которая не входит в эту вершину
 public class Lab7 {
     private static List<TripleData<Integer, Integer, Integer>> prim(List<List<Integer>> matrix) {
         int n = matrix.size();
@@ -47,10 +50,10 @@ public class Lab7 {
         return mst;
     }
 
+    // сложность O(V^2) V - колличество вершин
     public static void main(String[] args) throws IOException {
         String path = "src/SecondSemester/Lab7/input.txt";
         List<List<Integer>> matrix = Helper.readMatrixFromFile(path);
         System.out.println(prim(matrix));
-
     }
 }

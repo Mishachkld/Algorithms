@@ -1,7 +1,5 @@
 package Tools.HelpClasses;
 
-import Tools.Helper;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,16 +16,16 @@ public class Graph {
         this.graph = vertices;
     }
 
-    public void dijkstra(int startIndex) {
-        dist = new ArrayList<>(Collections.nCopies(vertices, Integer.MAX_VALUE));
+    public void dekstra(int startIndex) {
+        dist = new ArrayList<>(Collections.nCopies(vertices, Integer.MAX_VALUE)); // массив из максимальных значений
         dist.set(startIndex, 0);
         sptSet = new ArrayList<>(Collections.nCopies(vertices, false));
         for (int i = 0; i < vertices; i++) {
-            int u = this.findMinDistanceIndex();
+            int u = this.findMinDistanceIndex();  // получаем миниальную длину, за которую можем попасть в точку
             sptSet.set(u, true);
             for (int v = 0; v < vertices; v++) {
-                if ((graph.get(u).get(v) > 0) && (!sptSet.get(v)) && (dist.get(v) > dist.get(u) + graph.get(u).get(v))) {
-                    dist.set(v, dist.get(u) + graph.get(u).get(v));
+                if ((graph.get(u).get(v) > 0) && (!sptSet.get(v)) && (dist.get(v) > dist.get(u) + graph.get(u).get(v))) { // (либо оставляем предыдущее значение, либо вот эта формула)
+                    dist.set(v, dist.get(u) + graph.get(u).get(v));         // перещитываем длинны кратчайших особых путей
                 }
             }
         }
@@ -49,13 +47,15 @@ public class Graph {
 
     @Override
     public String toString() {
-        if (dist == null) {
-            return "Call method dijkstra after sout solution!!!";
-        }
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < vertices; i++) {
-            stringBuilder.append(i).append(" <-> ")
-                    .append(dist.get(i)).append("\n");
+        if (dist == null) {
+            stringBuilder.append("Call method dijkstra after sout solution!!!");
+        } else {
+            stringBuilder.append("Длина кротчайшего пути от начальной точки до других элементов графа").append("\n");
+            for (int i = 0; i < vertices; i++) {
+                stringBuilder.append(i).append(" <-> ")
+                        .append(dist.get(i)).append("\n");
+            }
         }
         return stringBuilder.toString();
     }
