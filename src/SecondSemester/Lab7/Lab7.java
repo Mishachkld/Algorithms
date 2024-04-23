@@ -15,9 +15,9 @@ import static Tools.Helper.*;
 // и рассматривать одну вершину которая не входит в эту вершину
 public class Lab7 {
     private static List<TripleData<Integer, Integer, Integer>> prim(List<List<Integer>> matrix) {
+        List<TripleData<Integer, Integer, Integer>> mst = new ArrayList<>();
         int n = matrix.size();
         used = new ArrayList<>(Collections.nCopies(n, false));
-        List<TripleData<Integer, Integer, Integer>> mst = new ArrayList<>();
         used.set(0, true);
         for (int i = 0; i < n; i++) {
             if (matrix.get(0).get(i) != -1) {
@@ -34,7 +34,7 @@ public class Lab7 {
                 if (used.get(i)) {
                     for (int j = 0; j < n; j++) {
                         int item = matrix.get(i).get(j);
-                        if (!used.get(j) && item != -1 && item != 0){
+                        if (!used.get(j) && item != -1 && item != 0){ // рассматриваем ребро, если оно не отмеченно посещенным (т.е. еще не находится в нашем множестве)
                             if (item < minWeight){
                                 minWeight = item;
                                 u = i;
