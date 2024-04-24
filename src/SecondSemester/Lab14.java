@@ -9,8 +9,7 @@ public class Lab14 {
         List<Integer> indexesOfFindSubstring = new ArrayList<>();
         int sizeOfString = string.length();
         int sizeOfFindString = findString.length();
-        String subString = string.substring(0, sizeOfString);
-        int hashOfString = subString.hashCode();
+        int hashOfString = string.substring(0, sizeOfString).hashCode();  // нужно использовать кольцевую хэшфункцию
         int hashOfFindString = findString.hashCode();
         for (int i = 0; i < (sizeOfString - sizeOfFindString) - 1; i++) {
             boolean one = (hashOfString == hashOfFindString);
@@ -18,15 +17,14 @@ public class Lab14 {
             if (one && two) { // если строки совпали, то текущий индекс - индекс начала искомой подстроки
                 indexesOfFindSubstring.add(i);
             } else {
-                subString = string.substring(i + 1, i + sizeOfFindString + 1);
-                hashOfString = subString.hashCode();
+                hashOfString = string.substring(i + 1, i + sizeOfFindString + 1).hashCode();
             }
         }
         return indexesOfFindSubstring;
     }
 
     public static void main(String[] args) {
-        String string = "ПППfATCAMOGUSGCAGAMOGUSAGAGTATACAGTAAMOGUSCG";
+        String string = "ПППfATCAM OGUSGCAGAMOGUSAGAG TATACAGTA AMOGUSCG";
         String subString = "AMOGUS";
         List<Integer> findSubStringArray = rabinKarp(subString, string);
         System.out.println(findSubStringArray);
