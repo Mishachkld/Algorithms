@@ -11,7 +11,7 @@ public class Lab10 {
 
     private static void findEulorianCycleRecursive(List<List<Integer>> graph, int v, List<Integer> circuit) {
         for (int u = 0; u < graph.get(v).size(); u++) {
-            if (graph.get(v).get(u) != 0) {
+            if (graph.get(v).get(u) != 0) { // если текущю вершину мы еще посетили, то ее отмечаем посещенной и смотрим ее вершины
                 graph.get(u).set(v, 0);
                 graph.get(v).set(u, 0);
                 findEulorianCycleRecursive(graph, u, circuit);

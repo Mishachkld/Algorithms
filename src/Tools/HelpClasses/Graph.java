@@ -51,8 +51,9 @@ public class Graph {
     public void bellmanFord(int src) {
         dist = new ArrayList<>(Collections.nCopies(vertices, Integer.MAX_VALUE));
         dist.set(src, 0);
-
-        for (int loop = 0; loop < vertices - 1; loop++) {
+        // V - 1 интераций достаточно, чтобы получить верные расстояния для всех вершин
+        int loop = vertices - 1;
+        while (loop != 0){
             for (int u = 0; u < vertices; u++) {
                 for (int v = 0; v < vertices; v++) {
                     if (graph.get(u).get(v) != 0) {
@@ -62,6 +63,7 @@ public class Graph {
                     }
                 }
             }
+            loop--;
         }
         System.out.println(dist);
     }
