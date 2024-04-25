@@ -46,7 +46,7 @@ public class Helper {
     }
 
     public static List<String> readFile(String path) throws IOException {
-        return new ArrayList<>(List.of(new BufferedReader(new FileReader(path)).readLine().split(" ")));
+        return new ArrayList<>(List.of(new BufferedReader(new FileReader(path)).readLine().split("")));
     }
 
     public static void outMatrix(List<List<Integer>> matrix) {

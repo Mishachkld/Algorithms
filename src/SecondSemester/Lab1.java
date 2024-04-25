@@ -2,10 +2,13 @@ package SecondSemester;
 
 import Tools.HelpClasses.Point;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import static java.lang.Math.pow;
 
 public class Lab1 {
     // сложность N*H - H - коллличество точек в оболочке
@@ -14,6 +17,10 @@ public class Lab1 {
     private static double rotate(Point startPoint, Point rightPoint, Point tecPoint) {
         return (rightPoint.x - startPoint.x) * (tecPoint.y - rightPoint.y) -
                 (rightPoint.y - startPoint.y) * (tecPoint.x - rightPoint.x);
+    }
+
+    private static double distance(Point one, Point two){
+        return pow(pow(one.x - two.x, 2) + pow(one.y - two.y, 2), 2);
     }
 
     public static List<Integer> jarvisCalculate(List<Point> points) { //
@@ -36,31 +43,22 @@ public class Lab1 {
         int p = numbersOfPoints.remove(0);
         numbersOfPoints.add(hull.get(0));
 
-        Point pointStart = points.get(numbersOfPoints.get(p));
-
-        /*while(true){
-            Point point = null;
-            for (Point value: points){
-                if ((point == null) || (rotate(pointStart, point, value) < 0)){
-                    point = value;
-                }
-            }
-            if (point == pointStart){
-                break;
-            }
-            point = ;
-            hull.add(points.indexOf(points.get(p)));
-        }*/
-
         while (true) {
             int right = 0;
+            double maxDistance = Integer.MIN_VALUE;
+            int maxDistanceIndexOfPoint = right;
             for (int i = 1; i < numbersOfPoints.size(); i++) {  // ищем самую точку из points, относительно последней вершины из hull
                                                                 // до тех пор, пока она не будет стартовой
                 double rotation = rotate(points.get(hull.get(hull.size() - 1)),
                         points.get(numbersOfPoints.get(right)),
                         points.get(numbersOfPoints.get(i)));
+                double tempDistance = distance(dots.get(hull.get(hull.size() - 1)), dots.get(numbersOfPoints.get(i)));
                 if (rotation < 0) {
                     right = i;
+                }
+                else if ((rotation == 0) && maxDistance < tempDistance) {
+                    right = i;
+                    maxDistance =  tempDistance;
                 }
             }
             if (numbersOfPoints.get(right).equals(hull.get(0))) {
@@ -70,7 +68,6 @@ public class Lab1 {
                 numbersOfPoints.remove(right);
             }
         }
-
         return hull;
     }
 
