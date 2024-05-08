@@ -45,9 +45,14 @@ public class Helper {
         return new ArrayList<>(List.of(new Scanner(System.in).nextLine().split("")));
     }
 
-    public static List<String> readFile(String path) throws IOException {
-        return new ArrayList<>(List.of(new BufferedReader(new FileReader(path)).readLine().split("")));
+    public static List<String> readFileInLine(String path, String splitter) throws IOException {
+        return new ArrayList<>(List.of(new BufferedReader(new FileReader(path)).readLine().split(splitter)));
+
     }
+    public static List<String> readFileInLine(String path) throws IOException {
+        return readFileInLine(path, "");
+    }
+
 
     public static void outMatrix(List<List<Integer>> matrix) {
         for (List<Integer> line : matrix) {
@@ -114,4 +119,6 @@ public class Helper {
         }
         return numbersArray;
     }
+
+
 }
