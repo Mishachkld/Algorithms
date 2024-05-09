@@ -6,12 +6,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class Lab11 {
-
-
     public static boolean automatic(List<String> textInCharsArray) {
         State state = State.STATE_1;
         boolean isFindSubString = false;
-        for (String item : textInCharsArray) {  // abbab
+        for (String item : textInCharsArray) {  // abbab ababa
             switch (state) {
                 case STATE_1:
                     if (item.equals("a")) {
@@ -47,7 +45,6 @@ public class Lab11 {
                     continue;
                 case STATE_6:
                     isFindSubString = true;  // получается, что мы уже нашли искомую подстроку
-                    int i = textInCharsArray.size();
                     break;
             }
             if (isFindSubString) {
@@ -71,6 +68,9 @@ public class Lab11 {
 
 
     enum State {
+        // начальное ссостояние - STATE_1 (на начальном состоянии ничего нет)
+        // переходы - в соотвествии с символом переходим в соответсвующие состояние
+        // конечное состояние STATE_6
         STATE_1, STATE_2, STATE_3, STATE_4, STATE_5, STATE_6
     }
 }
