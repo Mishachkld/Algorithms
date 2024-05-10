@@ -11,43 +11,44 @@ import java.util.List;
 public class Lab13 {
     // поиск строки с конца искомой строки
     public static boolean BoyerMurrrrrr(String findSubString, List<String> text) {
-        List<Integer> distance = new ArrayList<>(Collections.nCopies(256, findSubString.length())); // 256 все символы в акси таблицы
-        for (int i = 0; i < findSubString.length(); i++) {
+        List<Integer> distance = new ArrayList<>(Collections.nCopies(256, findSubString.length())); // 256 все символы в аcки таблицы
+        // поиск строки с конца искомой строки
+        for (int i = 0; i < findSubString.length() - 1; i++) {
             distance.set(findSubString.charAt(i), findSubString.length() - i - 1);
         }
         int lenSubString = findSubString.length() - 1;
         int j = findSubString.length() - 1;
         int i = findSubString.length() - 1;
         boolean isFindSubString = false;
-        while (i < text.size()){
-            if(text.get(i).charAt(0) == findSubString.charAt(j)){
-                i--; j--;
-                if (j < 0){
+        while (i < text.size()) {
+            if (text.get(i).charAt(0) == findSubString.charAt(j)) {
+                i--;
+                j--;
+                if (j < 0) {
+                    System.out.println(i + 1);
                     isFindSubString = true;
                     break;
                 }
-            }
-            else {
-                if (j == lenSubString){
+            } else {
+                if (j == lenSubString) {
                     i += distance.get(text.get(i).charAt(0));
-                }else{
+                } else {
                     i += distance.get(text.get(j).charAt(0));
                 }
             }
-
         }
         return isFindSubString;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException { //
         String path = "src/SecondSemester/Lab13/input.txt";
         List<String> text = Helper.readFileInLine(path, "");
-        String subString = "eeef";
+        String subString = "Mishach send hello";
         boolean isFindSubString = BoyerMurrrrrr(subString, text);
-        if (isFindSubString){
+        if (isFindSubString) {
             System.out.println("We found SubString ->" + subString);
-        }else{
-            System.out.println("SubString -> " + subString +" <- not Found!::::((((");
+        } else {
+            System.out.println("SubString -> " + subString + " <- not Found!::::((((");
         }
     }
 }
