@@ -7,19 +7,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-//алгоритм Бойера-Мура для поиска по образцу
+// алгоритм Бойера-Мура для поиска по образцу
 public class Lab13 {
     // поиск строки с конца искомой строки
     public static boolean BoyerMurrrrrr(String findSubString, List<String> text) {
         List<Integer> distance = new ArrayList<>(Collections.nCopies(256, findSubString.length())); // 256 все символы в аcки таблицы
-        // поиск строки с конца искомой строки
-        for (int i = 0; i < findSubString.length() - 1; i++) {
+        for (int i = 0; i < findSubString.length() - 1; i++) { // устанавливаем расстояние
             distance.set(findSubString.charAt(i), findSubString.length() - i - 1);
         }
         int lenSubString = findSubString.length() - 1;
         int j = findSubString.length() - 1;
         int i = findSubString.length() - 1;
         boolean isFindSubString = false;
+        // поиск строки с конца искомой строки
         while (i < text.size()) {
             if (text.get(i).charAt(0) == findSubString.charAt(j)) {
                 i--;
@@ -29,7 +29,7 @@ public class Lab13 {
                     isFindSubString = true;
                     break;
                 }
-            } else {
+            } else {  // происходит смещение на нужное число индексов
                 if (j == lenSubString) {
                     i += distance.get(text.get(i).charAt(0));
                 } else {
@@ -50,5 +50,6 @@ public class Lab13 {
         } else {
             System.out.println("SubString -> " + subString + " <- not Found!::::((((");
         }
+        // сложность - O(m + K) где K - длина алфавита, m - размер искомой строки(шалблона)
     }
 }
