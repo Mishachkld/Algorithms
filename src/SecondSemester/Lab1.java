@@ -21,8 +21,9 @@ public class Lab1 {
     }
 
 
-    private static int orent(Point p, Point q, Point r) {
+    private static int orientation(Point p, Point q, Point r) { // определяем, в каком порядке идут точки (по часовой, если 1, простив часовой, если 2, и коллиниарны, если 0)
         double value = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
+        System.out.println(value);
         if (value == 0) {
             return 0;
         }
@@ -61,10 +62,11 @@ public class Lab1 {
                 double tempDistance = distance(dots.get(hull.get(hull.size() - 1)), dots.get(numbersOfPoints.get(i)));
                 if (rotation < 0) {
                     right = i;
-                } else if ((rotation == 0) && maxDistance < tempDistance) {
+                }
+                /*else if ((rotation == 0) && maxDistance < tempDistance) {
                     right = i;
                     maxDistance = tempDistance;
-                }
+                }*/
             }
             if (numbersOfPoints.get(right).equals(hull.get(0))) {
                 break;
@@ -84,27 +86,27 @@ public class Lab1 {
     }
 
     private static List<Point> jarvisCalculate(List<Point> dots) {
+        Point startPoint = dots.stream().min(Comparator.comparing(Point::getX).thenComparing(Point::getY)).get(); // получаем мнимальную (левую) точку
+//        dots = dots.stream().sorted(Comparator.comparing(Point::getX).thenComparing(Point::getY)).collect(Collectors.toList());
         List<Point> pointsInShell = new ArrayList<>();
-        int size = dots.size();
-        Point startPoint = dots.stream().min((o1, o2) -> Math.min(o1.x, o2.x)).get(); // получаем мнимальную (левую) точку
-        Point p = startPoint;
+        System.out.println(dots);
+        Point tempPoint = startPoint;
         Point q;
-        while (true){
-            pointsInShell.add(p);
-
+        while (true) {
+            pointsInShell.add(tempPoint);
             q = null;
-            for (Point r: dots){
-                if (r == p){
+            for (Point point : dots) {
+                if (point == tempPoint) {
                     continue;
                 }
-                if (q == null || orent(p, q, r) == 2){
-                    q = r;
+                if ((q == null) || (orientation(tempPoint, q, point) == 2)) { // точка выберается та, у которой угол будет максимальным относительно текущей, предыдущей и следующей
+                    q = point;
                 }
             }
-            if (q == startPoint){
+            if (q == startPoint) { // если дошли до стартовой точки, то
                 break;
             }
-            p = q;
+            tempPoint = q;
         }
         return pointsInShell;
     }
@@ -112,10 +114,12 @@ public class Lab1 {
 
     private static List<Point> addPoints() {
         return new ArrayList<>(Arrays.asList(new Point(0, 0), new Point(0, 100), new Point(100, 0), new Point(50, 50), new Point(10, 0),
-                new Point(0, 9), new Point(40, 8), new Point(0, 6), new Point(0, 15), new Point(3, 3), new Point(5, 7)));
+                new Point(0, 9), new Point(40, 8), new Point(0, 6), new Point(0, 100), new Point(3, 3), new Point(5, 7)));
         /*return new ArrayList<>(Arrays.asList(new Point(1, 2), new Point(3, 5), new Point(6, 1), new Point(8, 4), new Point(10, 7),
                 new Point(7, 9), new Point(4, 8), new Point(2, 6), new Point(9, 8), new Point(4, 3), new Point(5, 7)));*/
         /*return new ArrayList<>(Arrays.asList(new Point(1, 1), new Point(2, -2), new Point(-1, -4), new Point(-1, 1), new Point(-2, -3),
                 new Point(0, -1), new Point(0, -2), new Point(1, -1)));*/
+       /* return new ArrayList<>(Arrays.asList(new Point(0, 3), new Point(2, 2), new Point(1, 1), new Point(-10, 231), new Point(3, 0),
+                new Point(-1, 0), new Point(32, 4)));*/
     }
 }
