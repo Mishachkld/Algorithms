@@ -2,11 +2,7 @@ package SecondSemester;
 
 import Tools.HelpClasses.Point;
 
-import java.awt.geom.Point2D;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static java.lang.Math.pow;
 
@@ -19,11 +15,21 @@ public class Lab1 {
                 (rightPoint.y - startPoint.y) * (tecPoint.x - rightPoint.x);
     }
 
-    private static double distance(Point one, Point two){
+
+    private static double distance(Point one, Point two) {
         return pow(pow(one.x - two.x, 2) + pow(one.y - two.y, 2), 2);
     }
 
-    public static List<Integer> jarvisCalculate(List<Point> points) { //
+
+    private static int orent(Point p, Point q, Point r) {
+        double value = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
+        if (value == 0) {
+            return 0;
+        }
+        return (value > 0) ? 1 : 2;
+    }
+
+    public static List<Integer> jarvisCalculateNotWorking(List<Point> points) { //
         List<Integer> hull = new ArrayList<>(); // в правильном порядке хранятся вершины
         List<Point> dots = new ArrayList<>(points);
 
@@ -48,17 +54,16 @@ public class Lab1 {
             double maxDistance = Integer.MIN_VALUE;
             int maxDistanceIndexOfPoint = right;
             for (int i = 1; i < numbersOfPoints.size(); i++) {  // ищем самую точку из points, относительно последней вершины из hull
-                                                                // до тех пор, пока она не будет стартовой
+                // до тех пор, пока она не будет стартовой
                 double rotation = rotate(points.get(hull.get(hull.size() - 1)),
                         points.get(numbersOfPoints.get(right)),
                         points.get(numbersOfPoints.get(i)));
                 double tempDistance = distance(dots.get(hull.get(hull.size() - 1)), dots.get(numbersOfPoints.get(i)));
                 if (rotation < 0) {
                     right = i;
-                }
-                else if ((rotation == 0) && maxDistance < tempDistance) {
+                } else if ((rotation == 0) && maxDistance < tempDistance) {
                     right = i;
-                    maxDistance =  tempDistance;
+                    maxDistance = tempDistance;
                 }
             }
             if (numbersOfPoints.get(right).equals(hull.get(0))) {
@@ -76,6 +81,32 @@ public class Lab1 {
         List<Point> dots = addPoints();
         System.out.println(dots);
         System.out.println(jarvisCalculate(dots));
+    }
+
+    private static List<Point> jarvisCalculate(List<Point> dots) {
+        List<Point> pointsInShell = new ArrayList<>();
+        int size = dots.size();
+        Point startPoint = dots.stream().min((o1, o2) -> Math.min(o1.x, o2.x)).get(); // получаем мнимальную (левую) точку
+        Point p = startPoint;
+        Point q;
+        while (true){
+            pointsInShell.add(p);
+
+            q = null;
+            for (Point r: dots){
+                if (r == p){
+                    continue;
+                }
+                if (q == null || orent(p, q, r) == 2){
+                    q = r;
+                }
+            }
+            if (q == startPoint){
+                break;
+            }
+            p = q;
+        }
+        return pointsInShell;
     }
 
 
