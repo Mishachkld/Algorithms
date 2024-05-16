@@ -89,7 +89,6 @@ public class Lab1 {
         Point startPoint = dots.stream().min(Comparator.comparing(Point::getX).thenComparing(Point::getY)).get(); // получаем мнимальную (левую) точку
         dots = dots.stream().sorted(Comparator.comparing(Point::getX).thenComparing(Point::getY)).collect(Collectors.toList());
         List<Point> pointsInShell = new ArrayList<>();
-        System.out.println(dots);
         Point tempPoint = startPoint;
         Point q;
         while (true) {
@@ -102,13 +101,12 @@ public class Lab1 {
                 }
                 if ((q == null) || (orientation(tempPoint, q, point) == 2)) { // точка выберается та, у которой угол будет максимальным относительно текущей, предыдущей и следующей
                     q = point;
-                }
-                else if ((orientation(tempPoint, q, point) == 0) && distance(pointsInShell.get(pointsInShell.size() - 1), point) > maxDistance){
+                } else if ((orientation(tempPoint, q, point) == 0) && distance(pointsInShell.get(pointsInShell.size() - 1), point) > maxDistance) {
                     q = point;
                     maxDistance = distance(pointsInShell.get(pointsInShell.size() - 1), point);
                 }
             }
-            if (q == startPoint) { // если дошли до стартовой точки, то
+            if (q == startPoint) { // если дошли до стартовой точки, то заканчиваем
                 break;
             }
             tempPoint = q;
@@ -118,8 +116,8 @@ public class Lab1 {
 
 
     private static List<Point> addPoints() {
-        return new ArrayList<>(Arrays.asList( new Point(0, 100), new Point(100, 0), new Point(50, 50), new Point(10, 0),
-                new Point(0, 9), new Point(40, 8), new Point(0, 6), new Point(0, 1590), new Point(0, 0),new Point(3, 3), new Point(5, 7)));
+        return new ArrayList<>(Arrays.asList(new Point(0, 0), new Point(0, 100), new Point(100, 0), new Point(50, 50), new Point(10, 0),
+                new Point(0, 9), new Point(40, 8), new Point(0, 6), new Point(0, 100), new Point(3, 3), new Point(5, 7)));
         /*return new ArrayList<>(Arrays.asList(new Point(1, 2), new Point(3, 5), new Point(6, 1), new Point(8, 4), new Point(10, 7),
                 new Point(7, 9), new Point(4, 8), new Point(2, 6), new Point(9, 8), new Point(4, 3), new Point(5, 7)));*/
         /*return new ArrayList<>(Arrays.asList(new Point(1, 1), new Point(2, -2), new Point(-1, -4), new Point(-1, 1), new Point(-2, -3),
