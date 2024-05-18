@@ -1,6 +1,7 @@
 package Tools;
 
 import Tools.HelpClasses.Point;
+import Tools.HelpClasses.TripleData;
 
 import java.io.*;
 import java.util.*;
@@ -49,6 +50,7 @@ public class Helper {
         return new ArrayList<>(List.of(new BufferedReader(new FileReader(path)).readLine().split(splitter)));
 
     }
+
     public static List<String> readFileInLine(String path) throws IOException {
         return readFileInLine(path, "");
     }
@@ -57,7 +59,8 @@ public class Helper {
     public static void outMatrix(List<List<Integer>> matrix) {
         for (List<Integer> line : matrix) {
             for (Integer item : line) {
-                System.out.print(item + " ");
+                int outItem = item != 0 ? 1 : 0;
+                System.out.print(outItem + " ");
             }
             System.out.println();
         }
@@ -104,15 +107,28 @@ public class Helper {
         return matrix;
     }
 
-    public static List<Integer> fillArray(int size){
+    public static List<TripleData<Integer, Integer, Integer>> readInLinesFromFile(String path) throws IOException {
+        return convertToTripleData(readMatrixFromFile(path));
+    }
+
+    private static List<TripleData<Integer, Integer, Integer>> convertToTripleData(List<List<Integer>> data) {
+        List<TripleData<Integer, Integer, Integer>> tripleDataList = new ArrayList<>();
+        for (List<Integer> line : data) {
+            tripleDataList.add(new TripleData<>(line.get(0), line.get(1), line.get(2)));
+        }
+        return tripleDataList;
+    }
+
+
+    public static List<Integer> fillArray(int size) {
         List<Integer> array = new ArrayList<>();
-        for (int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             array.add(0);
         }
         return array;
     }
 
-    public static List<Integer> generateNumeratedArray(int start, int finish){
+    public static List<Integer> generateNumeratedArray(int start, int finish) {
         List<Integer> numbersArray = new ArrayList<>();
         for (int i = start; i < finish; i++) {
             numbersArray.add(i);
