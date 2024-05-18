@@ -72,7 +72,24 @@ public class Lab6 {
     }
 
     public static List<List<Integer>> createMatrixIncidence(List<TripleData<Integer, Integer, Integer>> data) {
-        return null;
+        List<List<Integer>> incidentMatrix = new ArrayList<>();
+        for (int i = 0; i < SIZE_OF_GRAPH; i++) {
+            incidentMatrix.add(new ArrayList<>(Collections.nCopies(data.size(), 0)));
+        }
+        int count = 0;
+        for (int i = 0; i < data.size(); i++) {
+            incidentMatrix.get(data.get(i).first).set(i, 1);
+            incidentMatrix.get(data.get(i).second).set(i, -1);
+        }
+        System.out.println("Инциндентная матрица:");
+        for (int i = 0; i < data.size(); i++) {
+            for (int j = 0; j < SIZE_OF_GRAPH; j++) {
+                System.out.print(incidentMatrix.get(j).get(i) + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+        return incidentMatrix;
     }
 
     public static void main(String[] args) throws IOException {
@@ -80,7 +97,7 @@ public class Lab6 {
         List<TripleData<Integer, Integer, Integer>> data = readInLinesFromFile(path);
         List<List<Integer>> matrix = createMatrixFromTripleData(data);
 
-        System.out.println(createMatrixIncidence(data));
+        createMatrixIncidence(data);
         List<List<Integer>> nonOrentirMatrix = convertToNonOrentir(matrix);
 
         System.out.println("Является ли граф Эйлеровым: " + isElerGraph(matrix) + "\n"); // граф не Эйлеров
