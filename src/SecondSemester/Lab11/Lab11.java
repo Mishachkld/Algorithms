@@ -18,6 +18,7 @@ public class Lab11 {
                 state = transitionTable[state][subString.charAt(i)];
             }
         }
+
     }
 
     public static int search(String subString, String text) {
@@ -25,7 +26,8 @@ public class Lab11 {
         int positionOfSubstring = -1;
         int state = 0;
         for (int i = 0; i < text.length(); i++) {                           // Поиск с использованием конечного автомата
-            state = transitionTable[state][text.charAt(i)];
+            state = transitionTable[state][text.charAt(i)];  // идем последовательно по тексу и сверяемся с табличкой,
+                                                             // и переходим из состояния в состояние в соответствии с таблицей.
             if (state == subString.length()) {
                 positionOfSubstring = i - subString.length() + 1;           // Элемент найден
                 break;
@@ -35,8 +37,8 @@ public class Lab11 {
     }
 
     public static void main(String[] args) {
-        String text = "ABABDABACDABABCABAB";
-        String subString = "ABABCABAB";
+        String text = "AMGUSSIBUCKASBUS hello dfsdAMOGUSsfdsfdfs CAR";
+        String subString = "AMOGUS";
         int position = search(subString, text);
         if (position == -1) {
             System.out.println("Образец не найден");
