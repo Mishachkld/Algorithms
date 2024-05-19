@@ -49,7 +49,7 @@ public class Graph {
     }
 
     public void bellmanFord(int src) {
-        dist = new ArrayList<>(Collections.nCopies(vertices, Integer.MAX_VALUE));
+        dist = new ArrayList<>(Collections.nCopies(vertices, 10000)); /// здесь была проблема, что просиходило переполнение типа, пришлось делать костыль
         dist.set(src, 0);
         // V - 1 интераций достаточно, чтобы получить верные расстояния для всех вершин
         int loop = vertices - 1;
