@@ -2,11 +2,13 @@ package SecondSemester;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
+
 
 public class Lab14 {
-    public final static int q = Integer.MAX_VALUE;
+    private final static int q = Integer.MAX_VALUE;
 
-    public final static int BASE = 31;
+    private final static int BASE = 31;
 
     public static int gornerScheme(char[] sym, int start, int end) {
         int result = (int) (sym[start]);
@@ -50,6 +52,51 @@ public class Lab14 {
         System.out.println(string);
         for (Integer index : findSubStringArray) {
             System.out.println(index + "->" + string.substring(index, index + subString.length()));
+        }
+    }
+}
+
+class BM {
+    public static void main(String[] args) {
+        String source = "ПППfATCAM OGUSGCAGAMOGUSAGAG TATACAGTA AMOGUSCG";
+        String template = "AMOGUS";
+        System.out.println(getFirstEntry(source, template));
+    }
+
+    public static HashMap<Character, Integer> makeOffsetTable(String pattern) {
+        HashMap<Character, Integer> offsetTable = new HashMap<Character, Integer>();
+        for (int i = 0; i <= 255; i++) {
+            offsetTable.put((char) i, pattern.length());
+        }
+        for (int i = 0; i < pattern.length() - 1; i++) {
+            offsetTable.put(pattern.charAt(i), pattern.length() - i - 1);
+        }
+        return offsetTable;
+    }
+
+    public static int getFirstEntry(String s, String p) {
+        HashMap<Character, Integer> offsetTable = makeOffsetTable(p);
+        if (s.length() < p.length()) {
+            return -1;
+        }
+
+        int i = p.length() - 1;
+        int j = i;
+        int k = i;
+
+        while (j >= 0 && i <= s.length() - 1) {
+            j = p.length() - 1;
+            k = i;
+            while (j >= 0 && s.charAt(k) == p.charAt(j)) {
+                k--;
+                j--;
+            }
+            i += offsetTable.get(s.charAt(i));
+        }
+        if (k >= s.length() - p.length()) {
+            return -1;
+        } else {
+            return k + 1;
         }
     }
 }
