@@ -76,7 +76,6 @@ public class Lab6 {
         for (int i = 0; i < SIZE_OF_GRAPH; i++) {
             incidentMatrix.add(new ArrayList<>(Collections.nCopies(data.size(), 0)));
         }
-        int count = 0;
         for (int i = 0; i < data.size(); i++) {
             incidentMatrix.get(data.get(i).first).set(i, 1);
             incidentMatrix.get(data.get(i).second).set(i, -1);
@@ -95,14 +94,18 @@ public class Lab6 {
     public static void main(String[] args) throws IOException {
         String path = "src/DiscretMath/Lab6/input.txt";
         List<TripleData<Integer, Integer, Integer>> data = readInLinesFromFile(path);
+        System.out.println("Матрица смежности:");
         List<List<Integer>> matrix = createMatrixFromTripleData(data);
 
         createMatrixIncidence(data);
         List<List<Integer>> nonOrentirMatrix = convertToNonOrentir(matrix);
 
         System.out.println("Является ли граф Эйлеровым: " + isElerGraph(matrix) + "\n"); // граф не Эйлеров
+
+        System.out.println("Кратчайшие расстояния между вершинами: ");
         Graph graph = new Graph(nonOrentirMatrix);
         for (int i = 0; i < nonOrentirMatrix.size(); i++) {
+            System.out.print(i + ": ");
             graph.dekstra(i);
         }
     }
