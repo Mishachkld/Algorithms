@@ -55,11 +55,21 @@ public class Helper {
         return readFileInLine(path, "");
     }
 
+    public static List<List<Integer>> createMatrixFromTripleData(List<TripleData<Integer, Integer, Integer>> data) {
+        List<List<Integer>> matrix = new ArrayList<>(); // нужно посчитать колличество вершин
+        for (int i = 0; i < data.size(); i++) {
+            matrix.add(new ArrayList<>(Collections.nCopies(data.size(), 0))); // заполняем 0 матрицу n*n
+        }
+        for (TripleData<Integer, Integer, Integer> item : data) {
+            matrix.get(item.first).set(item.second, item.weight);
+        }
+        return matrix;
+    }
 
     public static void outMatrix(List<List<Integer>> matrix) {
         for (List<Integer> line : matrix) {
             for (Integer item : line) {
-                int outItem = item != 0 ? 1 : 0;
+                int outItem = item; // != 0 ? 1 : 0;
                 System.out.print(outItem + " ");
             }
             System.out.println();
