@@ -1,58 +1,51 @@
 package SecondSemester.Lab16;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import Tools.Helper;
+
+import java.io.IOException;
+import java.util.*;
 
 public class Lab16 {
 
-    static int[][] A;
-    static List<Integer> ans;
-    static int[] w;
+    private static List<List<Integer>> A;
+    private static final List<Integer> thingsInBag = new ArrayList<>();
+    private static List<Integer> w;
 
     public static void findAns(int k, int s) {
-        if (A[k][s] == 0) {
+        if (A.get(k).get(s) == 0) {
             return;
         }
-        if (A[k - 1][s] == A[k][s]) {
+        if (Objects.equals(A.get(k - 1).get(s), A.get(k).get(s))) {
             findAns(k - 1, s);
         } else {
-            findAns(k - 1, s - w[k-1]);
-            ans.add(k);
+            findAns(k - 1, s - w.get(k - 1));
+            thingsInBag.add(k - 1);
         }
     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        String path = "src/SecondSemester/Lab16/input.txt";
+        List<List<Integer>> dataFromFile = Helper.readMatrixFromFile(path);
+        List<Integer> sizesArray = dataFromFile.get(0);
+        w = dataFromFile.get(2); // набор весов
+        List<Integer> p = dataFromFile.get(1);  // стоимость для соотвествующей вещи
+        A = new ArrayList<>(); // матрица для динамического поиска вещей с масимальной стоимости
 
-        int N = scanner.nextInt();
-        int W = scanner.nextInt();
-
-        A = new int[N + 1][W + 1];
-        w = new int[N];
-        ans = new ArrayList<>();
-
-        int[] p = new int[N];
-        for (int i = 0; i < N; i++) {
-            p[i] = scanner.nextInt();
+        int N = sizesArray.get(0);
+        int W = sizesArray.get(1);
+        for (int i = 0; i < N + 1; i++) {
+            A.add(new ArrayList<>(Collections.nCopies(W + 1, 0))); // часть алогритма, заполняем нулями
         }
-
-        for (int i = 0; i < N; i++) {
-            w[i] = scanner.nextInt();
-        }
-
         for (int k = 1; k <= N; k++) {
-            for (int s = 1; s <= W; s++) {
-                if (s >= w[k-1]) {
-                    A[k][s] = Math.max(A[k - 1][s], A[k - 1][s - w[k-1]] + p[k-1]);
+            for (int s = 1; s <= W; s++) { // Перебираем все вместимости для каждого k
+                if (s >= w.get(k - 1)) {  // если вмещается , то выбераем - класть его в рюкзак или нет
+                    A.get(k).set(s, Math.max(A.get(k - 1).get(s), A.get(k - 1).get(s - w.get(k - 1)) + p.get(k - 1)));
                 } else {
-                    A[k][s] = A[k - 1][s];
+                    A.get(k).set(s, A.get(k - 1).get(s));
                 }
             }
         }
-
         findAns(N, W);
-        System.out.println(ans);
+        System.out.println(thingsInBag);
     }
-
 }
