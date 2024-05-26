@@ -17,9 +17,9 @@ public class Lab16 {
         }
         if (Objects.equals(A.get(k - 1).get(s), A.get(k).get(s))) {
             findAns(k - 1, s);
-        } else {
-            findAns(k - 1, s - w.get(k - 1));
-            thingsInBag.add(k - 1);
+        } else {   ///Если стоимость предмета k - 1 не равна стоимости предмета k для текущего s, то вызывается рекурсивно findAns() для предыдущего предмета k - 1 с уменьшенной вместимостью
+            findAns(k - 1, s - w.get(k - 1)); // на вес предмета, который добавляется в рюкзак.
+            thingsInBag.add(k - 1);                //  номер предмета k - 1 добавляется в список thingsInBag.
         }
     }
 
@@ -47,5 +47,9 @@ public class Lab16 {
         }
         findAns(N, W);
         System.out.println(thingsInBag);
+        System.out.println("Cost : Weight");
+        for (Integer index : thingsInBag) {
+            System.out.println(p.get(index) + " : " + w.get(index));
+        }
     }
 }
