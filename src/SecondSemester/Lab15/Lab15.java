@@ -25,7 +25,7 @@ public class Lab15 {
             Set<Integer> usedColors = new HashSet<>();
             for (Integer neighbor : graph.get(i)) {
                 usedColors.addAll(colored.get(neighbor));
-                System.out.println( neighbor);
+                System.out.println(neighbor);
             }
             System.out.println(usedColors.size());
             Set<Integer> freeColors = new HashSet<>(colours);
@@ -57,58 +57,58 @@ public class Lab15 {
 }
 
 class GraphColoring {
+    private int V; // Количество вершин в графе
+    private final LinkedList<Integer>[] adj; // Список смежности
 
-    private static int V; // Количество вершин в графе
-    private static int[] colors; // Массив для хранения цветов вершин
-    private static int[][] graph; // Матрица смежности графа
-
-    // Функция для проверки, можно ли покрасить вершину v цветом c
-    private static boolean isSafe(int v, int c) {
-        for (int i = 0; i < V; i++) {
-            if (graph[v][i] == 1 && c == colors[i]) {
-                return false;
-            }
-        }
-        return true;
+    public GraphColoring(int v) {
+        V = v;
+        adj = new LinkedList[v];
+        for (int i = 0; i < v; ++i)
+            adj[i] = new LinkedList();
     }
 
-    // Рекурсивная функция для раскраски графа
-    private static boolean graphColoringUtil(int v, int m) {
-        if (v == V) {
-            return true; // Все вершины раскрашены
-        }
-        for (int c = 0; c < m; c++) {
-            if (isSafe(v, c)) {
-                colors[v] = c;
-                if (graphColoringUtil(v + 1, m)) {
-                    return true;
-                }
-                colors[v] = -1; // Backtracking
-            }
-        }
-        return false;
+    void addEdge(int v, int w) {
+        adj[v].add(w);
+        adj[w].add(v);
     }
 
-    // Функция для раскраски графа с использованием жадного алгоритма
-    public static void graphColoringGreedy(int[][] g, int m) {
-        colors = new int[V];
-        Arrays.fill(colors, -1); // Инициализируем все вершины цветом -1 (не раскрашены)
-        graph = g;
-        if (!graphColoringUtil(0, m)) {
-            System.out.println("невозможно");
-        } else {
-            System.out.println("успешно раскрашен. " + m + " цвета");
-            System.out.println(Arrays.toString(colors));
+    // Функция для раскраски графа
+    void greedyColoring() {
+        int result[] = new int[V]; // Результат раскраски
+        Arrays.fill(result, -1); // Инициализация всех вершин как нераскрашенных
+        result[0] = 0; // Раскрашиваем первую вершину в цвет 0
+
+        boolean available[] = new boolean[V];         // Доступные цвета. true, если цвет доступен, false, если занят
+        Arrays.fill(available, true);
+
+        // Раскраска остальных (V-1) вершин
+        for (int u = 1; u < V; u++) {
+            for (int i : adj[u]) {             // Перебираем все смежные вершины и отмечаем их цвета как недоступные
+                if (result[i] != -1)
+                    available[result[i]] = false;
+            }
+            int cr;
+            for (cr = 0; cr < V; cr++)
+                if (available[cr]) // Находим первый доступный цвет
+                    break;
+            result[u] = cr; // Раскрашиваем вершину в найденный цвет
+            Arrays.fill(available, true); // Сбрасываем доступность цветов для следующей итерации
+        }
+        System.out.println("Хроматическое число графа: " + Arrays.stream(result).max().getAsInt());
+        System.out.println("Раскраска вершин:");
+        for (int u = 0; u < V; u++) {
+            System.out.println("Вершина " + u + " -> Цвет " + result[u]);
         }
     }
 
     public static void main(String[] args) {
-        int[][] graph = {{0, 1, 1, 1},
-                         {1, 0, 1, 0},
-                         {1, 1, 0, 1},
-                         {1, 0, 1, 0}};
-        V = graph.length;
-        int m = 3; // Количество доступных цветов
-        graphColoringGreedy(graph, m);
+        GraphColoring graph = new GraphColoring(5);
+        graph.addEdge(0, 1);
+        graph.addEdge(0, 2);
+        graph.addEdge(1, 2);
+        graph.addEdge(1, 3);
+        graph.addEdge(2, 3);
+        graph.addEdge(3, 4);
+        graph.greedyColoring();
     }
 }
